@@ -1,10 +1,14 @@
-String[] modules = ["jqa-uber-parent"]
+String[] modules = ['jqa-uber-parent']
 modules.each {
-  def jobName = "${it}-continuous"
+  def jobName = '${it}-continuous'
+  def gitUrl = 'git://github.com/buschmais/${it}'
   mavenJob(jobName) {
+    logRotator {
+      numToKeep(5)
+    }
     scm {
-      git('git://github.com/buschmais/jqa-uber-parent.git') {
-        branches("master")
+      git(gitUrl) {
+        branches('*/master')
       }
     }
     triggers {
