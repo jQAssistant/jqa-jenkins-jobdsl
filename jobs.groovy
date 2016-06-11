@@ -1,8 +1,8 @@
 String[] modules = ['jqa-uber-parent']
 modules.each {
     def module = it
-    def jobName = '${module}-continuous'
-    def gitUrl = 'git://github.com/buschmais/${module}'
+    def jobName = "${module}-continuous"
+    def gitUrl = "git://github.com/buschmais/${module}"
     mavenJob(jobName) {
         logRotator {
             numToKeep(5)
