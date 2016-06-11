@@ -11,7 +11,7 @@ modules.each {
 }
 
 def addJob(gitUrl, module, suffix, mavenGoals) {
-    def jobName = "[managed]-jqa-${module}-${suffix}"
+    def jobName = "managed-jqa-${module}-${suffix}"
     mavenJob(jobName) {
         logRotator {
             numToKeep(5)
