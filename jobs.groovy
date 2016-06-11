@@ -6,11 +6,11 @@ String[] modules = [
 modules.each {
     def module = it
     def gitUrl = "git://github.com/buschmais/jqa-${module}"
-    addJob(gitUrl, 'continuous', 'mvn clean verify')
-    addJob(gitUrl, 'integration', 'mvn clean install -PintegrationTest')
+    addJob(gitUrl, module, 'continuous', 'mvn clean verify')
+    addJob(gitUrl, module, 'integration', 'mvn clean install -PintegrationTest')
 }
 
-def addJob(gitUrl, suffix, goals) {
+def addJob(gitUrl, module, suffix, goals) {
     def jobName = "[managed]-jqa-${module}-${suffix}"
     mavenJob(jobName) {
         logRotator {
