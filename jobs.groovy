@@ -6,13 +6,7 @@ modules.each {
         logRotator {
             numToKeep(5)
         }
-        configFileBuildStep {
-            managedFiles {
-                managedFile {
-                    fileId("Maven Settings")
-                }
-            }
-        }
+        customConfigFile('Maven Settings')
         scm {
             git(gitUrl) {
                 branches('*/master')
