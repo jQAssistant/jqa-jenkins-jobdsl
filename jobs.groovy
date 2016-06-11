@@ -1,7 +1,10 @@
-String[] modules = ['jqa-uber-parent']
+String[] modules = [
+        'uber-parent',
+        'core-framework'
+]
 modules.each {
     def module = it
-    def jobName = "${module}-continuous"
+    def jobName = "jqa-${module}-continuous"
     def gitUrl = "git://github.com/buschmais/${module}"
     mavenJob(jobName) {
         logRotator {
@@ -15,8 +18,12 @@ modules.each {
         }
         triggers {
             scm('H/15 * * * *')
+            snapshotDependencies(true)
         }
         mavenInstallation('Maven 3.2.5')
         goals('clean install')
+        publishers {
+            mailer('dirk.mahler@buschmais.com,o.b.fischer@swe-blog.net', true, true)
+        }
     }
 }
