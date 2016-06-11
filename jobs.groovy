@@ -10,7 +10,7 @@ modules.each {
     addJob(gitUrl, module, 'integration', 'mvn clean install -PintegrationTest')
 }
 
-def addJob(gitUrl, module, suffix, goals) {
+def addJob(gitUrl, module, suffix, mavenGoals) {
     def jobName = "[managed]-jqa-${module}-${suffix}"
     mavenJob(jobName) {
         logRotator {
@@ -27,7 +27,7 @@ def addJob(gitUrl, module, suffix, goals) {
             snapshotDependencies(true)
         }
         mavenInstallation('Maven 3.2.5')
-        goals('clean install')
+        goals(mavenGoals)
         publishers {
             mailer('dirk.mahler@buschmais.com,o.b.fischer@swe-blog.net', true, true)
         }
