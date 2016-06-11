@@ -10,7 +10,7 @@ modules.each {
     addJob(gitUrl, 'integration', 'mvn clean install -PintegrationTest')
 }
 
-addJob(gitUrl, suffix, goals) {
+def addJob(gitUrl, suffix, goals) {
     def jobName = "[managed]-jqa-${module}-${suffix}"
     mavenJob(jobName) {
         logRotator {
