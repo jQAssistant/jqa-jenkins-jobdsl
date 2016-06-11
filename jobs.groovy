@@ -6,8 +6,9 @@ String[] modules = [
 modules.each {
     def module = it
     def gitUrl = "git://github.com/buschmais/jqa-${module}"
-    addJob(gitUrl, module, 'continuous', 'mvn clean verify')
-    addJob(gitUrl, module, 'integration', 'mvn clean install -PintegrationTest')
+    def jobName = addJob(gitUrl, module, 'continuous', 'clean verify')
+    addJob(gitUrl, module, 'integration', 'clean install -PintegrationTest')
+    queue(jobName)
 }
 
 def addJob(gitUrl, module, suffix, mavenGoals) {
@@ -32,4 +33,5 @@ def addJob(gitUrl, module, suffix, mavenGoals) {
             mailer('dirk.mahler@buschmais.com,o.b.fischer@swe-blog.net', true, true)
         }
     }
+    return jobName
 }
