@@ -11,7 +11,7 @@ modules.each {
     queue(continuousJob)
 }
 
-def addJob(gitUrl, module, suffix, mavenGoals, upstreamJob) {
+def addJob(gitUrl, module, suffix, mavenGoals, upstreamJob = null) {
     def jobName = "managed-jqa-${module}-${suffix}"
     mavenJob(jobName) {
         logRotator {
