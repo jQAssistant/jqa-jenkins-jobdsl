@@ -7,7 +7,7 @@ modules.each {
         logRotator {
             numToKeep(5)
         }
-        providedGlobalSettings('Maven Settings')
+        providedSettings('Maven Settings')
         scm {
             git(gitUrl) {
                 branches('*/master')
