@@ -5,7 +5,7 @@ String[] modules = [
 modules.each {
     def module = it
     def jobName = "jqa-${module}-continuous"
-    def gitUrl = "git://github.com/buschmais/${module}"
+    def gitUrl = "git://github.com/buschmais/jqa-${module}"
     mavenJob(jobName) {
         logRotator {
             numToKeep(5)
