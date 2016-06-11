@@ -2,10 +2,16 @@ String[] modules = [
         'uber-parent',
         'core-framework'
 ]
+
 modules.each {
     def module = it
-    def jobName = "jqa-${module}-continuous"
     def gitUrl = "git://github.com/buschmais/jqa-${module}"
+    addJob(gitUrl, 'continuous', 'mvn clean verify')
+    addJob(gitUrl, 'integration', 'mvn clean install -PintegrationTest')
+}
+
+addJob(gitUrl, suffix, goals) {
+    def jobName = "[managed]-jqa-${module}-${suffix}"
     mavenJob(jobName) {
         logRotator {
             numToKeep(5)
