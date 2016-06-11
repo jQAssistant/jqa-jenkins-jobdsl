@@ -6,12 +6,12 @@ String[] modules = [
 modules.each {
     def module = it
     def gitUrl = "git://github.com/buschmais/jqa-${module}"
-    def jobName = addJob(gitUrl, module, 'continuous', 'clean verify')
-    addJob(gitUrl, module, 'integration', 'clean install -PintegrationTest')
-    queue(jobName)
+    def continuousJob = addJob(gitUrl, module, 'continuous', 'clean install')
+    addJob(gitUrl, module, 'integration', 'clean verify -PintegrationTest', continuousJob)
+    queue(continuousJob)
 }
 
-def addJob(gitUrl, module, suffix, mavenGoals) {
+def addJob(gitUrl, module, suffix, mavenGoals, upstreamJob) {
     def jobName = "managed-jqa-${module}-${suffix}"
     mavenJob(jobName) {
         logRotator {
@@ -25,7 +25,11 @@ def addJob(gitUrl, module, suffix, mavenGoals) {
         }
         triggers {
             scm('H/15 * * * *')
-            snapshotDependencies(true)
+            if (upstreamJob) {
+                upstream(upstreamJob.name, 'SUCCESS')
+            } else {
+                snapshotDependencies(true)
+            }
         }
         mavenInstallation('Maven 3.2.5')
         goals(mavenGoals)
@@ -33,5 +37,4 @@ def addJob(gitUrl, module, suffix, mavenGoals) {
             mailer('dirk.mahler@buschmais.com,o.b.fischer@swe-blog.net', true, true)
         }
     }
-    return jobName
 }
