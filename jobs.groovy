@@ -6,8 +6,8 @@ String[] modules = [
 modules.each {
     def module = it
     def gitUrl = "git://github.com/buschmais/jqa-${module}"
-    def continuousJob = addJob(gitUrl, module, 'continuous', 'clean install')
-    addJob(gitUrl, module, 'integration', 'clean verify -PintegrationTest', continuousJob)
+    def continuousJob = addJob(gitUrl, module, 'continuous', 'clean verify')
+    addJob(gitUrl, module, 'integration', 'clean deploy -PintegrationTest', continuousJob)
     queue(continuousJob)
 }
 
