@@ -24,10 +24,10 @@ def addJob(gitUrl, module, suffix, mavenGoals, upstreamJob = null) {
             }
         }
         triggers {
-            scm('H/15 * * * *')
             if (upstreamJob) {
                 upstream(upstreamJob.name, 'SUCCESS')
             } else {
+                scm('H/15 * * * *')
                 snapshotDependencies(true)
             }
         }
