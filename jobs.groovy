@@ -36,7 +36,7 @@ modules.each {
 }
 
 def addJob(gitUrl, module, suffix, mavenGoals, upstreamJob = null) {
-    def jobName = "managed-jqa-${module}-${suffix}"
+    def jobName = "jqa-${module}-${suffix} (Managed Build)"
     mavenJob(jobName) {
         logRotator {
             numToKeep(5)
