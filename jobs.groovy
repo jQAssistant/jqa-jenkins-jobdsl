@@ -1,6 +1,30 @@
 String[] modules = [
         'uber-parent',
-        'core-framework'
+        'own-constraints',
+        'core-framework',
+        'plugin-parent',
+        'plugin-common',
+        'java-plugin',
+        'xml-plugin',
+        'yaml-plugin',
+        'junit-plugin',
+        'java8-plugin',
+        'jpa2-plugin',
+        'jaxrs-plugin',
+        'cdi-plugin',
+        'ejb3-plugin',
+        'javaee6-plugin',
+        'testng-plugin',
+        'osgi-plugin',
+        'maven3-plugin',
+        'tycho-plugin',
+        'rdbms-plugin',
+        'm2repo-plugin',
+        'graphml-plugin',
+        'neo4j-backend',
+        'distribution-specification',
+        'maven-plugin',
+        'commandline-tool'
 ]
 
 modules.each {
