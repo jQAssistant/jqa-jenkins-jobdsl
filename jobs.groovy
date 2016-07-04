@@ -53,6 +53,9 @@ def addJob(gitUrl, module, suffix, mavenGoals, upstreamJob = null) {
             } else {
                 scm('H/15 * * * *')
                 snapshotDependencies(true)
+                timerTrigger {
+                    spec('H H(0-7) * * *')
+                }
             }
         }
         mavenInstallation('Maven 3.2.5')
