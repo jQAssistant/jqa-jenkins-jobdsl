@@ -51,7 +51,7 @@ listView('Managed Jobs') {
 }
 
 def addJob(gitUrl, module, suffix, mavenGoals, upstreamJob = null) {
-    def jobName = "jqa-${module}-${suffix-ManagedBuild"
+    def jobName = "jqa-${module}-${suffix}-ManagedBuild"
     mavenJob(jobName) {
         logRotator {
             numToKeep(5)
