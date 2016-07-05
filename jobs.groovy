@@ -1,4 +1,3 @@
-def jobPrefix = 'jqa-'
 def String[] modules = [
         'uber-parent',
         'own-constraints',
@@ -38,12 +37,12 @@ modules.each {
 
 listView('Managed Jobs') {
     jobs {
-        regex("${jobPrefix}.+")
+        regex("jqa-.+")
     }
 }
 
 def addJob(gitUrl, module, suffix, mavenGoals, upstreamJob = null) {
-    def jobName = "${jobPrefix}-${module}-${suffix} (Managed Build)"
+    def jobName = "jqa-${module}-${suffix} (Managed Build)"
     mavenJob(jobName) {
         logRotator {
             numToKeep(5)
