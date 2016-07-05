@@ -39,6 +39,15 @@ listView('Managed Jobs') {
     jobs {
         regex("jqa-.+")
     }
+    columns {
+        status()
+        weather()
+        name()
+        lastSuccess()
+        lastFailure()
+        lastDuration()
+        buildButton()
+    }
 }
 
 def addJob(gitUrl, module, suffix, mavenGoals, upstreamJob = null) {
