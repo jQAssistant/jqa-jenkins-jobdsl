@@ -1,8 +1,5 @@
-def String[] modules = [
-        'uber-parent',
-        'own-constraints',
+def String[] modulesWithIT = [
         'core-framework',
-        'plugin-parent',
         'plugin-common',
         'java-plugin',
         'xml-plugin',
@@ -22,16 +19,29 @@ def String[] modules = [
         'm2repo-plugin',
         'graphml-plugin',
         'neo4j-backend',
-        'distribution-specification',
         'maven-plugin',
         'commandline-tool'
 ]
 
-modules.each {
+def String[] modulesWithSimpleBuild = [
+        'uber-parent',
+        'own-constraints',
+        'plugin-parent',
+        'distribution-specification'
+]
+
+modulesWithIT.each {
     def module = it
     def gitUrl = "git://github.com/buschmais/jqa-${module}"
-    def continuousJob = addJob(gitUrl, module, 'continuous', 'clean verify')
-    addJob(gitUrl, module, 'integration', 'clean deploy -P IT', continuousJob)
+    def continuousJob = addJob(gitUrl, module, 'ci', 'clean verify')
+    addJob(gitUrl, module, 'it', 'clean deploy -P IT', continuousJob)
+    queue(continuousJob)
+}
+
+modulesWithSimpleBuild.each {
+    def module = it
+    def gitUrl = "git://github.com/buschmais/jqa-${module}"
+    def continuousJob = addJob(gitUrl, module, 'ci', 'clean verify')
     queue(continuousJob)
 }
 
