@@ -42,7 +42,7 @@ modulesWithIT.each {
 modulesWithSimpleBuild.each {
     def module = it
     def gitUrl = "git://github.com/buschmais/jqa-${module}"
-    def continuousJob = addJob(gitUrl, module, 'ci', 'clean verify')
+    def continuousJob = addJob(gitUrl, module, 'ci', 'clean deploy')
     queue(continuousJob)
 }
 
