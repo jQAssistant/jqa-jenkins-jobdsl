@@ -25,6 +25,7 @@ def String[] modulesWithIT = [
 
 def String[] modulesWithSimpleBuild = [
         'asciidoctor-utilities',
+        'manual',
         'uber-parent',
         'own-constraints',
         'plugin-parent',
