@@ -1,36 +1,36 @@
 def String[] modulesWithIT = [
+        'cdi-plugin',
+        'commandline-tool',
         'core-framework',
-        'plugin-common',
-        'java-plugin',
-        'xml-plugin',
-        'yaml-plugin',
-        'junit-plugin',
+        'ejb3-plugin',
+        'graphml-plugin',
         'java8-plugin',
+        'java-plugin',
+        'javaee6-plugin',
+        'junit-plugin',
         'jpa2-plugin',
         'jaxrs-plugin',
-        'cdi-plugin',
-        'ejb3-plugin',
-        'javaee6-plugin',
-        'testng-plugin',
-        'osgi-plugin',
-        'maven3-plugin',
-        'tycho-plugin',
-        'rdbms-plugin',
         'm2repo-plugin',
-        'graphml-plugin',
-        'neo4j-backend',
         'maven-plugin',
-        'commandline-tool',
-	'spring-plugin'
+        'maven3-plugin',
+        'neo4j-backend',
+        'osgi-plugin',
+        'plugin-common',
+        'rdbms-plugin',
+        'spring-plugin',
+        'testng-plugin',
+        'tycho-plugin',
+        'xml-plugin',
+        'yaml-plugin',
 ]
 
 def String[] modulesWithSimpleBuild = [
         'asciidoctor-utilities',
+        'distribution-specification',
         'manual',
-        'uber-parent',
         'own-constraints',
         'plugin-parent',
-        'distribution-specification'
+        'uber-parent'
 ]
 
 modulesWithIT.each {
