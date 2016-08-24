@@ -20,7 +20,8 @@ def String[] modulesWithIT = [
         'graphml-plugin',
         'neo4j-backend',
         'maven-plugin',
-        'commandline-tool'
+        'commandline-tool',
+	'spring-plugin'
 ]
 
 def String[] modulesWithSimpleBuild = [
