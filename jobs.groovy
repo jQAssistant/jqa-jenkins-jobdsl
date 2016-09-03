@@ -10,6 +10,7 @@ def String[] modulesWithIT = [
         'junit-plugin',
         'jpa2-plugin',
         'jaxrs-plugin',
+        'json-plugin',
         'm2repo-plugin',
         'maven-plugin',
         'maven3-plugin',
