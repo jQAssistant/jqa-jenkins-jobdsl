@@ -1,0 +1,6 @@
+# Jenkins Job DSL scripts for jQAssistant
+
+This repository contains all Job DSL scripts
+used to generate all Jenkins jobs for all
+http://jqassistant.org[jQAssistant^] projects.
+
