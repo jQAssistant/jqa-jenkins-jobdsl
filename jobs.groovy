@@ -49,7 +49,7 @@ modulesWithSimpleBuild.each {
     queue(continuousJob)
 }
 
-listView('Managed Jobs') {
+listView('CI Jobs') {
     jobs {
         regex("jqa-.+")
     }
