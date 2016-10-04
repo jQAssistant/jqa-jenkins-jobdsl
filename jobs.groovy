@@ -70,7 +70,7 @@ def addJob(gitUrl, module, suffix, mavenGoals, upstreamJob = null) {
         logRotator {
             numToKeep(5)
         }
-        providedSettings('jQA')
+        providedSettings('Maven Settings')
         scm {
             git(gitUrl) {
                 branches('*/master')
