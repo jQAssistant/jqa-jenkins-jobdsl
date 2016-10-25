@@ -24,7 +24,8 @@ def Project[] projects = [
   ["jqa-testng-plugin", "jQA TestNG Plugin", "https://github.com/buschmais/jqa-testng-plugin.git", true],
   ["jqa-yaml-plugin", "jQA YAML Plugin", "https://github.com/buschmais/jqa-yaml-plugin.git", true],
   ["jqa-jaxrs-plugin", "jQA JAX RS Plugin", "https://github.com/buschmais/jqa-jaxrs-plugin.git", true],
-  ["jqa-jpa2-plugin", "jQA JPA 2 Plugin", "https://github.com/buschmais/jqa-jpa2-plugin.git", true]
+  ["jqa-jpa2-plugin", "jQA JPA 2 Plugin", "https://github.com/buschmais/jqa-jpa2-plugin.git", true],
+  ["jqa-cdi-plugin", "jQA CDI Plugin", "https://github.com/buschmais/jqa-cdi-plugin.git", true]
 ]
 
 projects.each {
