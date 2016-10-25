@@ -28,6 +28,7 @@ def Project[] projects = [
   ["jqa-cdi-plugin", "jQA CDI Plugin", "https://github.com/buschmais/jqa-cdi-plugin.git", true],
   ["jqa-ejb3-plugin", "jQA EJB 3 Plugin", "https://github.com/buschmais/jqa-ejb3-plugin.git", true],
   ["jqa-maven3-plugin", "jQA Maven 3 Plugin", "https://github.com/buschmais/jqa-maven3-plugin.git", true],
+  ["jqa-junit-plugin", "jQA JUnit Plugin", "https://github.com/buschmais/jqa-junit-plugin.git", true],
   ["jqa-m2repo-plugin", "jQA M2 Repository Plugin", "https://github.com/buschmais/jqa-m2repo-plugin.git", true]
 ]
 
