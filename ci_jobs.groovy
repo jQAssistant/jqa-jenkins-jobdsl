@@ -23,6 +23,7 @@ def String[] modulesWithIT = [
         'tycho-plugin',
         'xml-plugin',
         'yaml-plugin',
+        'archivers-plugin'
 ]
 
 def String[] modulesWithSimpleBuild = [
