@@ -122,11 +122,13 @@ def createChain(Project project, boolean manual) {
         }
         
         maven {
-          mavenInstallation('Maven 3.2.5')
+          mavenInstallation('Maven 3.2.5');
+
           goals('clean')
           goals('install') 
           
           if (project.needsITJob) {
+	     mavenOpts('-Dmaven.test.failure.ignore=false');
              goals('-P IT')
           }
    
