@@ -90,6 +90,7 @@ def addJob(gitUrl, module, suffix, mavenGoals, upstreamJob = null) {
         }
         mavenInstallation('Maven 3.2.5')
         goals(mavenGoals)
+        mavenOpts('-Dmaven.test.failure.ignore=false');
         publishers {
             mailer('dirk.mahler@buschmais.com,o.b.fischer@swe-blog.net', true, true)
         }
