@@ -50,6 +50,19 @@ modulesWithSimpleBuild.each {
     queue(continuousJob)
 }
 
+def String[] allModules = modulesWithIT + modulesWithSimpleBuild;
+
+
+allModules.each {
+    def module = it
+    def gitUrl = "git://github.com/buschmais/jqa-${module}"
+    def continuousJob = addJob(gitUrl, module, 'val',
+                               '-DskipTests -DskipITs -Djqassistant.severity=info clean install')
+    queue(continuousJob)
+}
+
+
+
 listView('CI Jobs') {
     jobs {
         regex("jqa-.+")
