@@ -82,7 +82,7 @@ def addJob(gitUrl, module, suffix, mavenGoals, upstreamJob = null) {
     def jobName = "jqa-${module}-${suffix}-ManagedBuild"
     mavenJob(jobName) {
         logRotator {
-            numToKeep(5)
+            numToKeep(20)
         }
         providedSettings('Maven Settings')
         scm {
