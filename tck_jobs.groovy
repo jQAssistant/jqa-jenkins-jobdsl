@@ -1,4 +1,4 @@
-def String jobName = "jqa-tck-compliance-test-ManagedBuild"
+def String jobName = "tck-jqa-compliance-test-ManagedBuild"
 def String mavenGoals = "clean install"
 def String gitUrl = "https://github.com/buschmais/jqa-compliance-tests.git"
 
@@ -28,6 +28,24 @@ mavenJob(jobName) {
 
     publishers {
         mailer('dirk.mahler@buschmais.com,o.b.fischer@swe-blog.net', true, true)
+    }
+}
+
+listView('jQA TCK Jobs') {
+    jobs {
+        regex("tck-.+")
+    }
+    columns {
+        status()
+        // weather() Explizit nicht gewollt. Beim Deployment kommt es manchmal
+        //           zu Fehlern, die dann händisch korrigiert werden.
+        //           Daher ist uns nur wichtig, ob das letzte Deployment
+        //           erfolgreich war oder nicht.
+        name()
+        lastSuccess()
+        lastFailure()
+        lastDuration()
+        buildButton()
     }
 }
 
