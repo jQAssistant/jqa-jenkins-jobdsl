@@ -1,5 +1,5 @@
 def String jobName = "tck-jqa-compliance-test-ManagedBuild"
-def String mavenGoals = "clean install"
+def String mavenGoals = "-P scan -P analyze clean install"
 def String gitUrl = "https://github.com/buschmais/jqa-compliance-tests.git"
 
 mavenJob(jobName) {
