@@ -39,14 +39,14 @@ modulesWithIT.each {
     def module = it
     def gitUrl = "git://github.com/buschmais/jqa-${module}"
     def continuousJob = addJob(gitUrl, module, 'ci', 'clean verify')
-    addJob(gitUrl, module, 'it', 'clean deploy -P IT', continuousJob)
+    addJob(gitUrl, module, 'it', '-U clean deploy -P IT', continuousJob)
     queue(continuousJob)
 }
 
 modulesWithSimpleBuild.each {
     def module = it
     def gitUrl = "git://github.com/buschmais/jqa-${module}"
-    def continuousJob = addJob(gitUrl, module, 'ci', 'clean deploy')
+    def continuousJob = addJob(gitUrl, module, 'ci', '-U clean deploy')
     queue(continuousJob)
 }
 
@@ -57,7 +57,7 @@ allModules.each {
     def module = it
     def gitUrl = "git://github.com/buschmais/jqa-${module}"
     def continuousJob = addJob(gitUrl, module, 'val',
-                               '-DskipTests -DskipITs -Djqassistant.severity=info clean install')
+                               '-U -DskipTests -DskipITs -Djqassistant.severity=info clean install')
     queue(continuousJob)
 }
 
