@@ -84,6 +84,7 @@ def addJob(gitUrl, module, suffix, mavenGoals, upstreamJob = null) {
         logRotator {
             numToKeep(20)
         }
+        localRepository(LocalRepositoryLocation.LOCAL_TO_WORKSPACE)
         providedSettings('Maven Settings')
         scm {
             git(gitUrl) {
