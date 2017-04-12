@@ -91,7 +91,7 @@ def addJob(gitUrl, module, suffix, mavenGoals, upstreamJob = null) {
 	// von Artefakten in das lokale, gemeinsame Repositoy,
 	// schreiben,
 	// Oliver B. Fischer, 2017-04-12
-        //localRepository(LocalRepositoryLocation.LOCAL_TO_WORKSPACE)
+        localRepository(LocalRepositoryLocation.LOCAL_TO_EXECUTOR)
         providedSettings('Maven Settings')
         scm {
             git(gitUrl) {
