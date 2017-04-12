@@ -84,7 +84,14 @@ def addJob(gitUrl, module, suffix, mavenGoals, upstreamJob = null) {
         logRotator {
             numToKeep(20)
         }
-        localRepository(LocalRepositoryLocation.LOCAL_TO_WORKSPACE)
+	// Leider gerade kein Platz auf den Server dafür,
+	// das jede Chain ihr eigenes Repository nutzen kann
+	// Wichtige wäre das jedoch, um zu verhindern daß
+	// Builds failen, weil andere gerade neue Versionen
+	// von Artefakten in das lokale, gemeinsame Repositoy,
+	// schreiben,
+	// Oliver B. Fischer, 2017-04-12
+        //localRepository(LocalRepositoryLocation.LOCAL_TO_WORKSPACE)
         providedSettings('Maven Settings')
         scm {
             git(gitUrl) {
