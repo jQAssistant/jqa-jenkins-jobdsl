@@ -57,7 +57,7 @@ allModules.each {
     def module = it
     def gitUrl = "git://github.com/buschmais/jqa-${module}"
     def continuousJob = addJob(gitUrl, module, 'val',
-                               '-U -DskipTests -DskipITs -Djqassistant.severity=info clean install')
+                               '-U -DskipTests -DskipITs -Djqassistant.failOnSeverity=INFO clean install')
     queue(continuousJob)
 }
 
