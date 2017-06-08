@@ -110,7 +110,7 @@ def createChain(Project project, boolean manual) {
           extensions {
             localBranch('${branch}');
             wipeOutWorkspace();
-      	      }
+          }
         }
       }
         
@@ -129,8 +129,8 @@ def createChain(Project project, boolean manual) {
           goals('install') 
           
           if (project.needsITJob) {
-	     mavenOpts('-Dmaven.test.failure.ignore=false');
-             goals('-P IT')
+	        mavenOpts('-Dmaven.test.failure.ignore=false -Djqassistant.failOnSeverity=INFO');
+            goals('-P IT')
           }
    
         }
