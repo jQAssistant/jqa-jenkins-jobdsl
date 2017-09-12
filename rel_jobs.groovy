@@ -47,34 +47,27 @@ projects.each {
     def project = it;
 
     createChain(project, true);
-    createChain(project, false);
 }
 
 
-def createChain(Project project, boolean manual) {
+def createChain(Project project) {
   
-    def jobName = "rel-${project.id}" + (manual ? "-manual" : "-automatic") + "-ManagedBuild";
-    def displayName = (manual ? "Manual " : "Automatic ") +"Release ${project.name}";
+    def jobName = "rel-${project.id}-manual-ManagedBuild";
+    def displayName = "Manual Release ${project.name}";
     def gitHubProject = "buschmais/${project.repoName}";
 
-  
 	mavenJob(jobName) {
       //displayName(displayName);
       
       mavenInstallation('Maven 3.2.5')
 
-      
       parameters {
-        if (manual) {	    
-  	      stringParam('relVersion');        
-          stringParam('nextDevVersion');   
-          stringParam('branch', 'master');
-        }
-        
+        stringParam('relVersion');
+        stringParam('nextDevVersion');
+        stringParam('branch', 'master');
         booleanParam('dryRun', true);
       }
-      
-        
+
       logRotator {
         numToKeep(15)
         artifactNumToKeep(1)
@@ -132,37 +125,21 @@ def createChain(Project project, boolean manual) {
 	        mavenOpts('-Dmaven.test.failure.ignore=false -Djqassistant.failOnSeverity=INFO');
             goals('-P IT')
           }
-   
         }
       }
       
       mavenInstallation('Maven 3.2.5')
           
-      if (!manual) {
-            goals('--batch-mode');
-			goals('--settings "$MAVEN_SETTINGS_FILE"');
-            goals('clean');
-            goals('release:prepare release:perform');
+      goals('--batch-mode');
+      goals('--settings "$MAVEN_SETTINGS_FILE"');
+      goals('clean');
+      goals('release:prepare release:perform');
 
-            goals('-DautoVersionSubmodules');
-            goals('-Darguments="-Dgpg.homedir=\'$GPG_HOME_DIR\'"');
-            
-      } else {
-            goals('--batch-mode');
-            goals('--settings "$MAVEN_SETTINGS_FILE"');            
-            goals('clean');
-			goals('release:prepare release:perform');
-        
-            goals('-DautoVersionSubmodules');
-            goals('-Darguments="-Dgpg.homedir=\'$GPG_HOME_DIR\'"');
-        
-            goals('-DreleaseVersion=${relVersion} -Dtag=${relVersion}');
-            goals('-DdevelopmentVersion=${nextDevVersion} -DdryRun=${dryRun}');
-            
-      }
+      goals('-DautoVersionSubmodules');
+      goals('-Darguments="-Dgpg.homedir=\'$GPG_HOME_DIR\'"');
 
-      }
-  
+      goals('-DreleaseVersion=${relVersion} -Dtag=${relVersion}');
+      goals('-DdevelopmentVersion=${nextDevVersion} -DdryRun=${dryRun}');
 }
 
 listView('jQA Release Jobs') {
