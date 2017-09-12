@@ -46,7 +46,7 @@ def Project[] projects = [
 projects.each {
     def project = it;
 
-    createChain(project, true);
+    createChain(project);
 }
 
 
