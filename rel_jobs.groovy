@@ -57,44 +57,44 @@ def createChain(Project project) {
     def gitHubProject = "buschmais/${project.repoName}";
 
 	mavenJob(jobName) {
-      //displayName(displayName);
-      
-      mavenInstallation('Maven 3.2.5')
+        //displayName(displayName);
 
-      parameters {
-        stringParam('relVersion');
-        stringParam('nextDevVersion');
-        stringParam('branch', 'master');
-        booleanParam('dryRun', true);
-      }
+        mavenInstallation('Maven 3.2.5')
 
-      logRotator {
-        numToKeep(15)
-        artifactNumToKeep(1)
-      }
-      
-      wrappers {
-        sshAgent('GitHub');
-        
-        configFileProvider {
-          managedFiles {
-            configFile {
-              fileId('5e7b65a4-252e-4878-9aed-b8fc196e2545');
-              variable('MAVEN_SETTINGS_FILE');
-              }
-          }
+        parameters {
+            stringParam('relVersion');
+            stringParam('nextDevVersion');
+            stringParam('branch', 'master');
+            booleanParam('dryRun', true);
         }
-        
-        credentialsBinding {
-          zipFile('GPG_HOME_DIR', 'gpg.zip (GPG)')
+
+        logRotator {
+            numToKeep(15)
+            artifactNumToKeep(1)
         }
-      }
-        
-      scm {
-        git {
-          remote {
-            url(project.repoName); 
-            // Credentials stehen für GitHub
+
+        wrappers {
+            sshAgent('GitHub');
+
+            configFileProvider {
+                managedFiles {
+                    configFile {
+                        fileId('5e7b65a4-252e-4878-9aed-b8fc196e2545');
+                        variable('MAVEN_SETTINGS_FILE');
+                    }
+                }
+            }
+
+            credentialsBinding {
+                zipFile('GPG_HOME_DIR', 'gpg.zip (GPG)')
+            }
+        }
+
+        scm {
+            git {
+                remote {
+                    url(project.repoName);
+                    // Credentials stehen für GitHub
             credentials('eca671a9-32f0-42a5-8608-c0749b4b2390');
           }
           
@@ -140,6 +140,7 @@ def createChain(Project project) {
 
       goals('-DreleaseVersion=${relVersion} -Dtag=${relVersion}');
       goals('-DdevelopmentVersion=${nextDevVersion} -DdryRun=${dryRun}');
+    }
 }
 
 listView('jQA Release Jobs') {
