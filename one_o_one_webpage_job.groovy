@@ -1,5 +1,5 @@
 
-def String gitUrl = "git@github.com:buschmais/jqassistant-101.git";
+def String gitUrl = "https://github.com/buschmais/jqassistant-101.git";
 def String jobName = "101-webpage-ManagedBuild";
 
 mavenJob(jobName) {
@@ -24,7 +24,13 @@ mavenJob(jobName) {
     }
 
     mavenInstallation('Maven 3.2.5')
-    goals("clean install")
+    goals("clean install deploy")
+    // You must replace this dummy path with the real one
+    // after generation of the job.
+    // I didn't find a way to set a default property for this
+    // in Jenkins.
+    // Oliver B. Fischer, 2017-09-17
+    mavenOpts('-DwebsitePath=/IDontWantToHaveTheRealPathInAPublicRepository');
 
     publishers {
         mailer('dirk.mahler@buschmais.com,o.b.fischer@swe-blog.net', true, true)
