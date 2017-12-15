@@ -24,13 +24,13 @@ mavenJob(jobName) {
     }
 
     mavenInstallation('Maven 3.2.5')
-    goals("clean install deploy")
+
     // You must replace this dummy path with the real one
     // after generation of the job.
     // I didn't find a way to set a default property for this
     // in Jenkins.
     // Oliver B. Fischer, 2017-09-17
-    mavenOpts('-DwebsitePath=/IDontWantToHaveTheRealPathInAPublicRepository');
+    goals("-DwebsitePath=/IDontWantToHaveTheRealPathInAPublicRepository clean install deploy")
 
     publishers {
         mailer('dirk.mahler@buschmais.com,o.b.fischer@swe-blog.net', true, true)
