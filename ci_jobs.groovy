@@ -27,6 +27,7 @@ def String[] modulesWithIT = [
 ]
 
 def String[] modulesWithSimpleBuild = [
+        'checkstyle-config',
         'asciidoctor-utilities',
         'distribution-specification',
         'manual',
