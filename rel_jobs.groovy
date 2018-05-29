@@ -41,7 +41,8 @@ def Project[] projects = [
   ["jqa-neo4j-backend", "jQA Neo4j Backend", "https://github.com/buschmais/jqa-neo4j-backend.git", true],
   ["jqa-commandline-tool", "jQA Commandline Tool", "https://github.com/buschmais/jqa-commandline-tool.git", true],
   ["jqa-manual", "jQA Manual", "https://github.com/buschmais/jqa-manual.git", false],
-  ["jqa-spring-plugin", "jQA Spring Plugin", "https://github.com/buschmais/jqa-spring-plugin.git", true]
+  ["jqa-spring-plugin", "jQA Spring Plugin", "https://github.com/buschmais/jqa-spring-plugin.git", true],
+  ["jqa-checkstyle-config", "jQA Checkstyle Config", "https://github.com/buschmais/jqa-checkstyle-config.git", false]
 ]
 
 projects.each {
