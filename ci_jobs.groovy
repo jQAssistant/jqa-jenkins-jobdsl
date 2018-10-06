@@ -40,29 +40,26 @@ modulesWithIT.each {
     def module = it
     def gitUrl = "git://github.com/buschmais/jqa-${module}"
     def continuousJob = addJob(gitUrl, module, 'ci', 'clean verify')
-    addJob(gitUrl, module, 'it', '-U clean deploy -P IT', continuousJob)
+    addJob(gitUrl, module, 'it', 'clean deploy -PIT -Djqassistant.failOnSeverity=INFO', continuousJob)
     queue(continuousJob)
 }
 
 modulesWithSimpleBuild.each {
     def module = it
     def gitUrl = "git://github.com/buschmais/jqa-${module}"
-    def continuousJob = addJob(gitUrl, module, 'ci', '-U clean deploy')
+    def continuousJob = addJob(gitUrl, module, 'ci', 'clean deploy')
     queue(continuousJob)
 }
 
 def String[] allModules = modulesWithIT + modulesWithSimpleBuild;
 
-
 allModules.each {
     def module = it
     def gitUrl = "git://github.com/buschmais/jqa-${module}"
     def continuousJob = addJob(gitUrl, module, 'val',
-                               '-U -DskipTests -DskipITs -Djqassistant.failOnSeverity=INFO clean install')
-    queue(continuousJob)
+                               '-DskipTests -DskipITs -Djqassistant.failOnSeverity=INFO clean install', null, true)
+    // queue(continuousJob)
 }
-
-
 
 listView('CI Jobs') {
     jobs {
@@ -79,7 +76,7 @@ listView('CI Jobs') {
     }
 }
 
-def addJob(gitUrl, module, suffix, mavenGoals, upstreamJob = null) {
+def addJob(gitUrl, module, suffix, mavenGoals, upstreamJob = null, disabled = false) {
     def jobName = "jqa-${module}-${suffix}-ManagedBuild"
     mavenJob(jobName) {
         logRotator {
@@ -115,6 +112,9 @@ def addJob(gitUrl, module, suffix, mavenGoals, upstreamJob = null) {
         mavenOpts('-Dmaven.test.failure.ignore=false');
         publishers {
             mailer('dirk.mahler@buschmais.com,o.b.fischer@swe-blog.net', true, true)
+        }
+        if (disabled) {
+            disabled()
         }
     }
 }
