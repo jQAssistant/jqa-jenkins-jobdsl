@@ -41,14 +41,14 @@ modulesWithIT.each {
     def gitUrl = "git://github.com/buschmais/jqa-${module}"
     def continuousJob = addJob(gitUrl, module, 'ci', 'clean verify')
     addJob(gitUrl, module, 'it', 'clean deploy -PIT -Djqassistant.failOnSeverity=INFO', continuousJob)
-    queue(continuousJob)
+//    queue(continuousJob)
 }
 
 modulesWithSimpleBuild.each {
     def module = it
     def gitUrl = "git://github.com/buschmais/jqa-${module}"
     def continuousJob = addJob(gitUrl, module, 'ci', 'clean deploy')
-    queue(continuousJob)
+//    queue(continuousJob)
 }
 
 listView('CI Jobs') {
@@ -93,7 +93,7 @@ def addJob(gitUrl, module, suffix, mavenGoals, upstreamJob = null, disableJob = 
                 scm('H/15 * * * *')
                 snapshotDependencies(true)
                 timerTrigger {
-                    spec('H H(0-7) * * *')
+                    spec('H H(0-7) * * 7') // trigger timer build only once a week on sundays
                 }
             }
         }
