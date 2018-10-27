@@ -93,7 +93,7 @@ def addJob(gitUrl, module, suffix, mavenGoals, upstreamJob = null, disableJob = 
                 scm('H/15 * * * *')
                 snapshotDependencies(true)
                 timerTrigger {
-                    spec('H H(0-7) * * *')
+                    spec('H H(0-7) * * 7') // trigger timer build only once a week on sundays
                 }
             }
         }
