@@ -104,4 +104,5 @@ def addJob(gitUrl, module, suffix, mavenGoals, upstreamJob = null, disableJob = 
     if (queueJob) {
         queue(job)
     }
+    return job
 }
