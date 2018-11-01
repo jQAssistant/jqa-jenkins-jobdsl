@@ -1,4 +1,4 @@
-def String[] modulesWithIT = [
+String[] modulesWithIT = [
         'cdi-plugin',
         'commandline-tool',
         'core-framework',
@@ -26,7 +26,7 @@ def String[] modulesWithIT = [
         'archivers-plugin'
 ]
 
-def String[] modulesWithSimpleBuild = [
+String[] modulesWithSimpleBuild = [
         'checkstyle-config',
         'asciidoctor-utilities',
         'distribution-specification',
@@ -39,16 +39,14 @@ def String[] modulesWithSimpleBuild = [
 modulesWithIT.each {
     def module = it
     def gitUrl = "git://github.com/buschmais/jqa-${module}"
-    def continuousJob = addJob(gitUrl, module, 'ci', 'clean verify')
+    def continuousJob = addJob(gitUrl, module, 'ci', 'clean verify -Djqassistant.skip')
     addJob(gitUrl, module, 'it', 'clean deploy -PIT -Djqassistant.failOnSeverity=MINOR', continuousJob)
-//    queue(continuousJob)
 }
 
 modulesWithSimpleBuild.each {
     def module = it
     def gitUrl = "git://github.com/buschmais/jqa-${module}"
-    def continuousJob = addJob(gitUrl, module, 'ci', 'clean deploy')
-//    queue(continuousJob)
+    addJob(gitUrl, module, 'ci', 'clean deploy -Djqassistant.failOnSeverity=MINOR')
 }
 
 listView('CI Jobs') {
@@ -66,19 +64,13 @@ listView('CI Jobs') {
     }
 }
 
-def addJob(gitUrl, module, suffix, mavenGoals, upstreamJob = null, disableJob = false) {
+def addJob(gitUrl, module, suffix, mavenGoals, upstreamJob = null, disableJob = false, queueJob = false) {
     def jobName = "jqa-${module}-${suffix}-ManagedBuild"
-    mavenJob(jobName) {
+    job = mavenJob(jobName) {
         logRotator {
-            numToKeep(20)
+            numToKeep(10)
         }
-	// Leider gerade kein Platz auf den Server dafür,
-	// das jede Chain ihr eigenes Repository nutzen kann
-	// Wichtige wäre das jedoch, um zu verhindern daß
-	// Builds failen, weil andere gerade neue Versionen
-	// von Artefakten in das lokale, gemeinsame Repositoy,
-	// schreiben,
-	// Oliver B. Fischer, 2017-04-12
+        // Use a shared repo for enabling trigger on SNAPSHOT changes
         localRepository(LocalRepositoryLocation.LOCAL_TO_EXECUTOR)
         providedSettings('Maven Settings')
         scm {
@@ -93,7 +85,8 @@ def addJob(gitUrl, module, suffix, mavenGoals, upstreamJob = null, disableJob = 
                 scm('H/15 * * * *')
                 snapshotDependencies(true)
                 timerTrigger {
-                    spec('H H(0-7) * * 7') // trigger timer build only once a week on sundays
+                    // trigger timer build once a week on sundays
+                    spec('H H(0-7) * * 7')
                 }
             }
         }
@@ -107,5 +100,8 @@ def addJob(gitUrl, module, suffix, mavenGoals, upstreamJob = null, disableJob = 
         if (disableJob) {
             disabled()
         }
+    }
+    if (queueJob) {
+        queue(job)
     }
 }
