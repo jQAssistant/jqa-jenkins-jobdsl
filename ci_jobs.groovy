@@ -97,6 +97,7 @@ def addJob(gitUrl, module, suffix, mavenGoals, upstreamJob = null, disableJob = 
                 }
             }
         }
+        jdk('JDK 1.8')
         mavenInstallation('Maven 3.2.5')
         goals(mavenGoals)
         mavenOpts('-Dmaven.test.failure.ignore=false');
