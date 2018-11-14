@@ -23,6 +23,7 @@ mavenJob(jobName) {
         }
     }
 
+    jdk('JDK 10')
     mavenInstallation('Maven 3.2.5')
 
     // You must replace this dummy path with the real one
