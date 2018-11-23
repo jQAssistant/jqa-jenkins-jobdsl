@@ -21,31 +21,35 @@ mavenSettings = 'oss-maven-settings'
 gitCredentials = 'GitHub'
 gpgCredentials = 'GPG'
 
-// jQAssistant Contribution Jobs
-class ContribJob {
+// Jobs
+class Project {
+    // The name of the GitHub module
     String module
     String name
 }
-ContribJob[] contribJobs = [
-        new ContribJob(module: 'jqassistant-contrib-common', name: 'jqa-contrib-common'),
-        new ContribJob(module: 'jqassistant-asciidoc-report-plugin', name: 'jqa-asciidoc-report-plugin'),
-        new ContribJob(module: 'jqassistant-plantuml-rule-plugin', name: 'jqa-plantuml-rule-plugin'),
-        new ContribJob(module: 'jqassistant-test-impact-analysis-plugin', name: 'jqa-test-impact-analysis-plugin'),
-        new ContribJob(module: 'sonar-jqassistant-plugin', name: 'sonar-jqassistant-plugin')
-]
-contribJobs.each {
-    ci('jqassistant-contrib', it.module, it.name)
-    release('jqassistant-contrib', it.module, it.name)
-}
 
-// XO Jobs
-ci('buschmais', 'extended-objects', 'xo')
-release('buschmais', 'extended-objects', 'xo')
+[
+        new Project(module: 'jqassistant-contrib-common', name: 'jqa-contrib-common'),
+        new Project(module: 'jqassistant-asciidoc-report-plugin', name: 'jqa-asciidoc-report-plugin'),
+        new Project(module: 'jqassistant-plantuml-rule-plugin', name: 'jqa-plantuml-rule-plugin'),
+        new Project(module: 'jqassistant-test-impact-analysis-plugin', name: 'jqa-test-impact-analysis-plugin'),
+        new Project(module: 'sonar-jqassistant-plugin', name: 'sonar-jqassistant-plugin')
+].each {
+    defineJobs('jqassistant-contrib', it)
+}
+defineJobs('buschmais', new Project(module: 'extended-objects', name: 'xo'))
+
+
+def defineJobs(organization, jobDefinition) {
+    ci(organization, jobDefinition.module, jobDefinition.name)
+    release(organization, jobDefinition.module, jobDefinition.name)
+}
 
 // Defines a CI job
 def ci(organization, module, jobName) {
     def gitUrl = "https://github.com/${organization}/${module}.git"
     job = mavenJob(jobName + '-ci') {
+        lockableResources(jobName)
         logRotator {
             numToKeep(10)
         }
@@ -81,6 +85,7 @@ def ci(organization, module, jobName) {
 def release(organization, module, jobName) {
     def gitUrl = "https://github.com/${organization}/${module}.git"
     job = mavenJob(jobName + '-rel') {
+        lockableResources(jobName)
         parameters {
             booleanParam('DryRun', false, '')
             stringParam('ReleaseVersion', '', 'The version to release and to be used as tag.')
