@@ -70,7 +70,8 @@ def addJob(gitUrl, module, suffix, mavenGoals, upstreamJob = null, disableJob = 
         logRotator {
             numToKeep(10)
         }
-        //usePrivateRepository(false)
+        // Use a shared repo for enabling trigger on SNAPSHOT changes
+        localRepository(LocalRepositoryLocation.LOCAL_TO_EXECUTOR)
         providedSettings('Maven Settings')
         scm {
             git(gitUrl) {
