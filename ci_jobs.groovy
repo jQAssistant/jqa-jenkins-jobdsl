@@ -70,7 +70,7 @@ def addJob(gitUrl, module, suffix, mavenGoals, upstreamJob = null, disableJob = 
         logRotator {
             numToKeep(10)
         }
-        usePrivateRepository(false)
+        //usePrivateRepository(false)
         providedSettings('Maven Settings')
         scm {
             git(gitUrl) {
