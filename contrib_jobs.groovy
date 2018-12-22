@@ -59,7 +59,7 @@ def ci(organization, module, jobName) {
                     url(gitUrl)
                     credentials(gitCredentials)
                 }
-                branches('*/master')
+                branches('refs/heads/master')
             }
         }
         triggers {
@@ -87,9 +87,10 @@ def release(organization, module, jobName) {
     job = mavenJob(jobName + '-rel') {
         lockableResources(jobName)
         parameters {
-            booleanParam('DryRun', false, '')
+            stringParam('Branch', 'master', 'The branch to build the release from.')
             stringParam('ReleaseVersion', '', 'The version to release and to be used as tag.')
             stringParam('DevelopmentVersion', '', 'The next development version.')
+            booleanParam('DryRun', false, '')
         }
         wrappers {
             configFiles {
@@ -112,9 +113,9 @@ def release(organization, module, jobName) {
                     url(gitUrl)
                     credentials(gitCredentials)
                 }
-                branch('*/master')
+                branch('refs/heads/${Branch}')
                 extensions {
-                    localBranch 'master'
+                    localBranch('${Branch}')
                 }
             }
         }
