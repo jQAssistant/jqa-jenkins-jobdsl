@@ -1,5 +1,5 @@
 jdk = 'JDK 1.8'
-maven = 'Maven 3.5.0'
+maven = 'Maven 3.5'
 
 String gitUrl = "https://github.com/buschmais/jqassistant-101.git";
 String jobName = "101-webpage-ManagedBuild";

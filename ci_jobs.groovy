@@ -1,5 +1,5 @@
 jdk = 'JDK 1.8'
-maven = 'Maven 3.5.0'
+maven = 'Maven 3.5'
 
 String[] modulesWithIT = [
         'cdi-plugin',
