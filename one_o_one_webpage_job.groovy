@@ -1,6 +1,8 @@
+jdk = 'JDK 1.8'
+maven = 'Maven 3.5.0'
 
-def String gitUrl = "https://github.com/buschmais/jqassistant-101.git";
-def String jobName = "101-webpage-ManagedBuild";
+String gitUrl = "https://github.com/buschmais/jqassistant-101.git";
+String jobName = "101-webpage-ManagedBuild";
 
 mavenJob(jobName) {
     logRotator {
@@ -23,8 +25,8 @@ mavenJob(jobName) {
         }
     }
 
-    jdk('JDK 8')
-    mavenInstallation('Maven 3.5')
+    jdk(jdk)
+    mavenInstallation(maven)
 
     // Environment variable 101_HOME must be defined in Jenkins
     goals('clean install deploy -DwebsitePath=$101_HOME')

@@ -1,3 +1,6 @@
+jdk = 'JDK 1.8'
+maven = 'Maven 3.5.0'
+
 String[] modulesWithIT = [
         'cdi-plugin',
         'commandline-tool',
@@ -90,8 +93,8 @@ def addJob(gitUrl, module, suffix, mavenGoals, upstreamJob = null, disableJob = 
                 }
             }
         }
-        jdk('JDK 1.8')
-        mavenInstallation('Maven 3.5')
+        jdk(jdk)
+        mavenInstallation(maven)
         goals(mavenGoals)
         mavenOpts('-Dmaven.test.failure.ignore=false');
         publishers {

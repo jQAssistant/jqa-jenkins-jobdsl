@@ -13,10 +13,10 @@
  *
  * Tool installations:
  * - "JDK 1.8"
- * - "Maven 3.6.0"
+ * - "Maven 3.5.0"
  */
 jdk = 'JDK 1.8'
-maven = 'Maven 3.5'
+maven = 'Maven 3.5.0'
 mavenSettings = 'oss-maven-settings'
 gitCredentials = 'GitHub'
 gpgCredentials = 'GPG'
