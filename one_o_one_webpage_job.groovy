@@ -24,7 +24,7 @@ mavenJob(jobName) {
     }
 
     jdk('JDK 8')
-    mavenInstallation('Maven 3.5.0')
+    mavenInstallation('Maven 3.5')
 
     // Environment variable 101_HOME must be defined in Jenkins
     goals("clean install deploy -DwebsitePath=${101_HOME}")
