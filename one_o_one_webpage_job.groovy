@@ -23,15 +23,11 @@ mavenJob(jobName) {
         }
     }
 
-    jdk('JDK 10')
-    mavenInstallation('Maven 3.2.5')
+    jdk('JDK 8')
+    mavenInstallation('Maven 3.5.0')
 
-    // You must replace this dummy path with the real one
-    // after generation of the job.
-    // I didn't find a way to set a default property for this
-    // in Jenkins.
-    // Oliver B. Fischer, 2017-09-17
-    goals("-DwebsitePath=/IDontWantToHaveTheRealPathInAPublicRepository clean install deploy")
+    // Environment variable 101_HOME must be defined in Jenkins
+    goals("clean install deploy -DwebsitePath=${101_HOME}")
 
     publishers {
         mailer('dirk.mahler@buschmais.com,o.b.fischer@swe-blog.net', true, true)
