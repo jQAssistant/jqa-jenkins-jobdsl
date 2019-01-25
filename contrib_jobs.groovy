@@ -73,7 +73,7 @@ def ci(organization, module, jobName) {
         jdk(jdk)
         mavenInstallation(maven)
         providedSettings(mavenSettings)
-        goals('clean deploy')
+        goals('clean deploy -PIT')
         mavenOpts('-Dmaven.test.failure.ignore=false')
         publishers {
             mailer('dirk.mahler@buschmais.com', true, true)
