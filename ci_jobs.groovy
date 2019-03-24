@@ -1,5 +1,7 @@
 jdk = 'JDK 1.8'
 maven = 'Maven 3.5'
+mavenSettings = 'oss-maven-settings'
+gitCredentials = 'GitHub'
 
 String[] modulesWithIT = [
         'cdi-plugin',
@@ -75,10 +77,13 @@ def addJob(gitUrl, module, suffix, mavenGoals, upstreamJob = null, disableJob = 
         }
         // Use a shared repo for enabling trigger on SNAPSHOT changes
         localRepository(LocalRepositoryLocation.LOCAL_TO_EXECUTOR)
-        providedSettings('Maven Settings')
         scm {
-            git(gitUrl) {
-                branches('*/master')
+            git {
+                remote {
+                    url(gitUrl)
+                    credentials(gitCredentials)
+                }
+                branches('refs/heads/master')
             }
         }
         triggers {
@@ -89,12 +94,13 @@ def addJob(gitUrl, module, suffix, mavenGoals, upstreamJob = null, disableJob = 
                 snapshotDependencies(true)
                 timerTrigger {
                     // trigger timer build once a week on sundays
-                    spec('H H(0-7) * * 7')
+                    spec('H H(7-10) * * 7')
                 }
             }
         }
         jdk(jdk)
         mavenInstallation(maven)
+        providedSettings(mavenSettings)
         goals(mavenGoals)
         mavenOpts('-Dmaven.test.failure.ignore=false');
         publishers {
