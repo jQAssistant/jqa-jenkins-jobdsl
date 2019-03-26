@@ -1,5 +1,6 @@
 jdk = 'JDK 1.8'
 maven = 'Maven 3.5'
+mavenSettings = 'oss-maven-settings'
 
 String gitUrl = "https://github.com/buschmais/jqassistant-101.git";
 String jobName = "101-webpage-ManagedBuild";
@@ -9,7 +10,7 @@ mavenJob(jobName) {
         numToKeep(20)
     }
 
-    providedSettings('Maven Settings')
+    providedSettings(mavenSettings)
 
     scm {
         git(gitUrl) {
