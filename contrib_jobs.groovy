@@ -9,7 +9,6 @@
  *
  * Credentials:
  * - "GitHub": Private SSH Key
- * - "GPG: ZIP-file containing GPG pubring and secring for signing the Maven artifacts
  *
  * Tool installations:
  * - "JDK 1.8"
@@ -19,7 +18,6 @@ jdk = 'JDK 1.8'
 maven = 'Maven 3.5'
 mavenSettings = 'oss-maven-settings'
 gitCredentials = 'GitHub'
-gpgCredentials = 'GPG'
 
 // Jobs
 class Project {
@@ -52,7 +50,6 @@ def ci(organization, project) {
     def gitUrl = "https://github.com/${organization}/${project.repository}.git"
     def jobName = project.name + '-ci'
     job = mavenJob(jobName) {
-        // CI jobs are visible to everybody
         authorization {
             permission('hudson.model.Item.Discover', 'anonymous')
             permission('hudson.model.Item.Read', 'anonymous')
@@ -95,6 +92,11 @@ def release(organization, project) {
     def gitUrl = "https://github.com/${organization}/${project.repository}.git"
     def jobName = project.name + '-rel'
     job = mavenJob(jobName) {
+        authorization {
+            permission('hudson.model.Item.Discover', 'anonymous')
+            permission('hudson.model.Item.Read', 'anonymous')
+            permission('hudson.model.Item.Workspace', 'anonymous')
+        }
         lockableResources(project.name)
         parameters {
             stringParam('Branch', 'master', 'The branch to build the release from.')
@@ -109,9 +111,6 @@ def release(organization, project) {
                 }
             }
             sshAgent(gitCredentials)
-            credentialsBinding {
-                zipFile('GPG_HOME_DIR', gpgCredentials)
-            }
             preBuildCleanup()
         }
         logRotator {
@@ -133,7 +132,6 @@ def release(organization, project) {
         mavenInstallation(maven)
         providedSettings(mavenSettings)
         goals('release:prepare release:perform -s "$MAVEN_SETTINGS" -DautoVersionSubmodules -DreleaseVersion=${ReleaseVersion} -Dtag=${ReleaseVersion} -DdevelopmentVersion=${DevelopmentVersion} -DdryRun=${DryRun}"')
-        // -Darguments="-Dgpg.homedir=\'$GPG_HOME_DIR\'"')
         mavenOpts('-Dmaven.test.failure.ignore=false')
         publishers {
             mailer('dirk.mahler@buschmais.com', true, true)
