@@ -30,19 +30,20 @@ class Project {
 defineJobs('buschmais', new Project(repository: 'extended-objects', name: 'xo'))
 
 // jQA Contrib
-def contribProjects = [
+[
         new Project(repository: 'jqassistant-contrib-common', name: 'jqassistant-contrib-common'),
         new Project(repository: 'jqassistant-asciidoc-report-plugin', name: 'jqassistant-asciidoc-report-plugin'),
-        new Project(repository: 'jqassistant-plantuml-rule-plugin', name: 'jqassistant-plantuml-rule-plugin'),
         new Project(repository: 'jqassistant-test-impact-analysis-plugin', name: 'jqassistant-test-impact-analysis-plugin'),
+        new Project(repository: 'jqassistant-java-metrics-plugin', name: 'jqassistant-java-metrics-plugin'),
+        new Project(repository: 'jqassistant-plantuml-rule-plugin', name: 'jqassistant-plantuml-rule-plugin'),
         new Project(repository: 'sonar-jqassistant-plugin', name: 'sonar-jqassistant-plugin')
 ].each {
-  defineJobs('jqassistant-contrib', it)
+    defineJobs('jqassistant-contrib', it)
 }
 
 def defineJobs(organization, project) {
-  ci(organization, project)
-  release(organization, project)
+    ci(organization, project)
+    release(organization, project)
 }
 
 // Defines a CI job
