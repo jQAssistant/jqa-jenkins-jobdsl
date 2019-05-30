@@ -28,6 +28,7 @@ String[] modulesWithIT = [
         'tycho-plugin',
         'xml-plugin',
         'yaml-plugin',
+        'yaml2-plugin',
         'archivers-plugin'
 ]
 
