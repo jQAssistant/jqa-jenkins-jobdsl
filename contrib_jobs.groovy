@@ -34,8 +34,10 @@ defineJobs('buschmais', new Project(repository: 'extended-objects', name: 'xo'))
         new Project(repository: 'jqassistant-contrib-common', name: 'jqassistant-contrib-common'),
         new Project(repository: 'jqassistant-asciidoc-report-plugin', name: 'jqassistant-asciidoc-report-plugin'),
         new Project(repository: 'jqassistant-test-impact-analysis-plugin', name: 'jqassistant-test-impact-analysis-plugin'),
-        new Project(repository: 'jqassistant-java-metrics-plugin', name: 'jqassistant-java-metrics-plugin'),
         new Project(repository: 'jqassistant-plantuml-rule-plugin', name: 'jqassistant-plantuml-rule-plugin'),
+        new Project(repository: 'jqassistant-dashboard-plugin', name: 'jqassistant-dashboard-plugin'),
+        new Project(repository: 'jqassistant-java-metrics-plugin', name: 'jqassistant-java-metrics-plugin'),
+     // new Project(repository: 'jqassistant-java-ddd-plugin', name: 'jqassistant-java-ddd-plugin'),
         new Project(repository: 'sonar-jqassistant-plugin', name: 'sonar-jqassistant-plugin')
 ].each {
     defineJobs('jqassistant-contrib', it)
@@ -48,7 +50,7 @@ def defineJobs(organization, project) {
 
 // Defines a CI job
 def ci(organization, project) {
-    def gitUrl = "https://github.com/${organization}/${project.repository}.git"
+    def gitUrl = 'https://github.com/${organization}/${project.repository}.git'
     def jobName = project.name + '-ci'
     job = mavenJob(jobName) {
         authorization {
@@ -90,7 +92,7 @@ def ci(organization, project) {
 
 // Defines a Release job
 def release(organization, project) {
-    def gitUrl = "https://github.com/${organization}/${project.repository}.git"
+    def gitUrl = 'https://github.com/${organization}/${project.repository}.git'
     def jobName = project.name + '-rel'
     job = mavenJob(jobName) {
         authorization {
