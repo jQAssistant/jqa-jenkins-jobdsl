@@ -50,7 +50,7 @@ def defineJobs(organization, project) {
 
 // Defines a CI job
 def ci(organization, project) {
-    def gitUrl = 'https://github.com/${organization}/${project.repository}.git'
+    def gitUrl = "https://github.com/${organization}/${project.repository}.git"
     def jobName = project.name + '-ci'
     job = mavenJob(jobName) {
         authorization {
@@ -92,7 +92,7 @@ def ci(organization, project) {
 
 // Defines a Release job
 def release(organization, project) {
-    def gitUrl = 'https://github.com/${organization}/${project.repository}.git'
+    def gitUrl = "https://github.com/${organization}/${project.repository}.git"
     def jobName = project.name + '-rel'
     job = mavenJob(jobName) {
         authorization {
