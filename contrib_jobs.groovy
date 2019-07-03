@@ -37,7 +37,7 @@ defineJobs('buschmais', new Project(repository: 'extended-objects', name: 'xo'))
         new Project(repository: 'jqassistant-plantuml-rule-plugin', name: 'jqassistant-plantuml-rule-plugin'),
         new Project(repository: 'jqassistant-dashboard-plugin', name: 'jqassistant-dashboard-plugin'),
         new Project(repository: 'jqassistant-java-metrics-plugin', name: 'jqassistant-java-metrics-plugin'),
-     // new Project(repository: 'jqassistant-java-ddd-plugin', name: 'jqassistant-java-ddd-plugin'),
+        new Project(repository: 'jqassistant-java-ddd-plugin', name: 'jqassistant-java-ddd-plugin'),
         new Project(repository: 'sonar-jqassistant-plugin', name: 'sonar-jqassistant-plugin')
 ].each {
     defineJobs('jqassistant-contrib', it)
