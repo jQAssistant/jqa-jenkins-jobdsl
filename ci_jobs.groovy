@@ -44,14 +44,14 @@ String[] modulesWithSimpleBuild = [
 
 modulesWithIT.each {
     def module = it
-    def gitUrl = "git://github.com/buschmais/jqa-${module}"
+    def gitUrl = "git://github.com/jqassistant/jqa-${module}"
     def continuousJob = addJob(gitUrl, module, 'ci', 'clean verify -Djqassistant.skip')
     addJob(gitUrl, module, 'it', 'clean deploy -PIT -Djqassistant.failOnSeverity=MINOR', continuousJob)
 }
 
 modulesWithSimpleBuild.each {
     def module = it
-    def gitUrl = "git://github.com/buschmais/jqa-${module}"
+    def gitUrl = "git://github.com/jqassistant/jqa-${module}"
     addJob(gitUrl, module, 'ci', 'clean deploy -Djqassistant.failOnSeverity=MINOR')
 }
 
