@@ -35,4 +35,11 @@ mavenJob(jobName) {
     publishers {
         mailer('dirk.mahler@buschmais.com,o.b.fischer@swe-blog.net', true, true)
     }
+
+    wrappers {
+        timeout {
+            absolute(minutes = 60)
+        }
+    }
+
 }

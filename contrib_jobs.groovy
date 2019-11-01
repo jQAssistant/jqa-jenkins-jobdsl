@@ -87,6 +87,11 @@ def ci(organization, project) {
         publishers {
             mailer('dirk.mahler@buschmais.com', true, true)
         }
+        wrappers {
+            timeout {
+                absolute(minutes = 60)
+            }
+        }
     }
 }
 
@@ -115,6 +120,9 @@ def release(organization, project) {
             }
             sshAgent(gitCredentials)
             preBuildCleanup()
+            timeout {
+                absolute(minutes = 60)
+            }
         }
         logRotator {
             numToKeep(10)
