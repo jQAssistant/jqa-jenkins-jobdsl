@@ -4,6 +4,7 @@ mavenSettings = 'oss-maven-settings'
 gitCredentials = 'GitHub'
 
 String[] modulesWithIT = [
+        'asciidoc-report-plugin',
         'cdi-plugin',
         'commandline-tool',
         'core-framework',
