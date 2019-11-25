@@ -61,6 +61,8 @@ def ci(organization, project) {
             permission('hudson.model.Item.Workspace', 'anonymous')
         }
         lockableResources(project.name)
+        // Use a shared repo for enabling trigger on SNAPSHOT changes
+        localRepository(LocalRepositoryLocation.LOCAL_TO_EXECUTOR)
         logRotator {
             numToKeep(10)
         }
