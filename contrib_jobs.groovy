@@ -32,7 +32,6 @@ defineJobs('buschmais', new Project(repository: 'extended-objects', name: 'xo'))
 // jQA Contrib
 [
         new Project(repository: 'jqassistant-contrib-common', name: 'jqassistant-contrib-common'),
-        new Project(repository: 'jqassistant-asciidoc-report-plugin', name: 'jqassistant-asciidoc-report-plugin'),
         new Project(repository: 'jqassistant-test-impact-analysis-plugin', name: 'jqassistant-test-impact-analysis-plugin'),
         new Project(repository: 'jqassistant-plantuml-rule-plugin', name: 'jqassistant-plantuml-rule-plugin'),
         new Project(repository: 'jqassistant-dashboard-plugin', name: 'jqassistant-dashboard-plugin'),
