@@ -28,7 +28,7 @@ class Project {
 }
 
 // XO
-defineJobs('buschmais', new Project(repository: 'extended-objects'))
+defineJobs('buschmais', new Project(repository: 'extended-objects', runSonar: true))
 
 // jQA Contrib
 [
