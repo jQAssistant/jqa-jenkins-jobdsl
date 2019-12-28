@@ -86,15 +86,11 @@ def ci(organization, project) {
         jdk(jdk)
         mavenInstallation(maven)
         providedSettings(mavenSettings)
-        def goals = 'clean deploy -PIT'
         if (project.runSonar) {
-          goals = goals + 'sonar:sonar'
+            goals('clean deploy -PIT sonar:sonar')
+        } else {
+            goals('clean deploy -PIT')
         }
-        goals(goals)
-        if (project.runSonar){
-            mavenOpts('-DpreparationGoals="clean verify sonar:sonar"')
-        }
-//        mavenOpts('-Dmaven.test.failure.ignore=false')
         publishers {
             mailer('dirk.mahler@buschmais.com', true, true)
         }
@@ -160,7 +156,9 @@ def release(organization, project) {
         mavenInstallation(maven)
         providedSettings(mavenSettings)
         goals('release:prepare release:perform -s "$MAVEN_SETTINGS" -DautoVersionSubmodules -DreleaseVersion=${ReleaseVersion} -Dtag=${ReleaseVersion} -DdevelopmentVersion=${DevelopmentVersion} -DdryRun=${DryRun}"')
-        mavenOpts('-Dmaven.test.failure.ignore=false')
+        if (project.runSonar) {
+            mavenOpts('-DpreparationGoals="clean verify sonar:sonar"')
+        }
         publishers {
             mailer('dirk.mahler@buschmais.com', true, true)
         }
