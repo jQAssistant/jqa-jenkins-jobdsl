@@ -23,23 +23,24 @@ gitCredentials = 'GitHub'
 class Project {
     // The name of the GitHub repository
     String repository
-    String name
+    // if true a sonar analysis will be triggered for each ci/release build
+    boolean runSonar
 }
 
 // XO
-defineJobs('buschmais', new Project(repository: 'extended-objects', name: 'xo'))
+defineJobs('buschmais', new Project(repository: 'extended-objects'))
 
 // jQA Contrib
 [
-        new Project(repository: 'jqassistant-contrib-common', name: 'jqassistant-contrib-common'),
-        new Project(repository: 'jqassistant-test-impact-analysis-plugin', name: 'jqassistant-test-impact-analysis-plugin'),
-        new Project(repository: 'jqassistant-plantuml-rule-plugin', name: 'jqassistant-plantuml-rule-plugin'),
-        new Project(repository: 'jqassistant-dashboard-plugin', name: 'jqassistant-dashboard-plugin'),
-        new Project(repository: 'jqassistant-java-metrics-plugin', name: 'jqassistant-java-metrics-plugin'),
-        new Project(repository: 'jqassistant-java-ddd-plugin', name: 'jqassistant-java-ddd-plugin'),
-        new Project(repository: 'jqassistant-apoc-plugin', name: 'jqassistant-apoc-plugin'),
-        new Project(repository: 'jqassistant-graph-algorithms-plugin', name: 'jqassistant-graph-algorithms-plugin'),
-        new Project(repository: 'sonar-jqassistant-plugin', name: 'sonar-jqassistant-plugin')
+        new Project(repository: 'jqassistant-contrib-common'),
+        new Project(repository: 'jqassistant-test-impact-analysis-plugin'),
+        new Project(repository: 'jqassistant-plantuml-rule-plugin'),
+        new Project(repository: 'jqassistant-dashboard-plugin'),
+        new Project(repository: 'jqassistant-java-metrics-plugin'),
+        new Project(repository: 'jqassistant-java-ddd-plugin'),
+        new Project(repository: 'jqassistant-apoc-plugin'),
+        new Project(repository: 'jqassistant-graph-algorithms-plugin'),
+        new Project(repository: 'sonar-jqassistant-plugin', runSonar: true)
 ].each {
     defineJobs('jqassistant-contrib', it)
 }
@@ -85,12 +86,22 @@ def ci(organization, project) {
         jdk(jdk)
         mavenInstallation(maven)
         providedSettings(mavenSettings)
-        goals('clean deploy -PIT')
-        mavenOpts('-Dmaven.test.failure.ignore=false')
+        def goals = 'clean deploy -PIT'
+        if (project.runSonar) {
+          goals = goals + 'sonar:sonar'
+        }
+        goals(goals)
+        if (project.runSonar){
+            mavenOpts('-DpreparationGoals="clean verify sonar:sonar"')
+        }
+//        mavenOpts('-Dmaven.test.failure.ignore=false')
         publishers {
             mailer('dirk.mahler@buschmais.com', true, true)
         }
         wrappers {
+            credentialsBinding {
+                string('SONARCLOUD_LOGIN', 'SonarCloud')
+            }
             timeout {
                 absolute(minutes = 60)
             }
@@ -101,14 +112,14 @@ def ci(organization, project) {
 // Defines a Release job
 def release(organization, project) {
     def gitUrl = "https://github.com/${organization}/${project.repository}.git"
-    def jobName = project.name + '-rel'
+    def jobName = project.repository + '-rel'
     job = mavenJob(jobName) {
         authorization {
             permission('hudson.model.Item.Discover', 'anonymous')
             permission('hudson.model.Item.Read', 'anonymous')
             permission('hudson.model.Item.Workspace', 'anonymous')
         }
-        lockableResources(project.name)
+        lockableResources(project.repository)
         parameters {
             stringParam('Branch', 'master', 'The branch to build the release from.')
             stringParam('ReleaseVersion', '', 'The version to release and to be used as tag.')
@@ -122,6 +133,9 @@ def release(organization, project) {
                 }
             }
             sshAgent(gitCredentials)
+            credentialsBinding {
+                string('SONARCLOUD_LOGIN', 'SonarCloud')
+            }
             preBuildCleanup()
             timeout {
                 absolute(minutes = 60)
