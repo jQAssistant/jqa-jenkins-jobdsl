@@ -53,14 +53,14 @@ def defineJobs(organization, project) {
 // Defines a CI job
 def ci(organization, project) {
     def gitUrl = "https://github.com/${organization}/${project.repository}.git"
-    def jobName = project.name + '-ci'
+    def jobName = project.repository + '-ci'
     job = mavenJob(jobName) {
         authorization {
             permission('hudson.model.Item.Discover', 'anonymous')
             permission('hudson.model.Item.Read', 'anonymous')
             permission('hudson.model.Item.Workspace', 'anonymous')
         }
-        lockableResources(project.name)
+        lockableResources(project.repository)
         // Use a shared repo for enabling trigger on SNAPSHOT changes
         localRepository(LocalRepositoryLocation.LOCAL_TO_EXECUTOR)
         logRotator {
