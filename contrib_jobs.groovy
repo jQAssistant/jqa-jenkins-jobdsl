@@ -155,12 +155,7 @@ def release(organization, project) {
         jdk(jdk)
         mavenInstallation(maven)
         providedSettings(mavenSettings)
-        def defaultGoals = 'release:prepare release:perform -s "$MAVEN_SETTINGS" -DautoVersionSubmodules -DreleaseVersion=${ReleaseVersion} -Dtag=${ReleaseVersion} -DdevelopmentVersion=${DevelopmentVersion} -DdryRun=${DryRun}"'
-        if (project.runSonar) {
-            goals(defaultGoals + ' -DreleaseProfiles=sonar')
-        } else {
-            goals(defaultGoals)
-        }
+        goals('release:prepare release:perform -s "$MAVEN_SETTINGS" -DautoVersionSubmodules -DreleaseVersion=${ReleaseVersion} -Dtag=${ReleaseVersion} -DdevelopmentVersion=${DevelopmentVersion} -DdryRun=${DryRun}"')
         publishers {
             mailer('dirk.mahler@buschmais.com', true, true)
         }
