@@ -87,7 +87,7 @@ def ci(organization, project) {
         mavenInstallation(maven)
         providedSettings(mavenSettings)
         if (project.runSonar) {
-            goals('clean deploy -PIT sonar:sonar')
+            goals('clean deploy -PIT,sonar')
         } else {
             goals('clean deploy -PIT')
         }
@@ -155,9 +155,11 @@ def release(organization, project) {
         jdk(jdk)
         mavenInstallation(maven)
         providedSettings(mavenSettings)
-        goals('release:prepare release:perform -s "$MAVEN_SETTINGS" -DautoVersionSubmodules -DreleaseVersion=${ReleaseVersion} -Dtag=${ReleaseVersion} -DdevelopmentVersion=${DevelopmentVersion} -DdryRun=${DryRun}"')
+        def defaultGoals = 'release:prepare release:perform -s "$MAVEN_SETTINGS" -DautoVersionSubmodules -DreleaseVersion=${ReleaseVersion} -Dtag=${ReleaseVersion} -DdevelopmentVersion=${DevelopmentVersion} -DdryRun=${DryRun}"'
         if (project.runSonar) {
-            mavenOpts('-DpreparationGoals="clean verify sonar:sonar"')
+            goals(defaultGoals + ' -DreleaseProfiles=sonar')
+        } else {
+            goals(defaultGoals)
         }
         publishers {
             mailer('dirk.mahler@buschmais.com', true, true)
