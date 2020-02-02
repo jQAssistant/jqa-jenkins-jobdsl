@@ -72,7 +72,7 @@ def ci(organization, project) {
                     url(gitUrl)
                     credentials(gitCredentials)
                 }
-                branches('refs/heads/master')
+//                branches('refs/heads/*')
             }
         }
         triggers {
