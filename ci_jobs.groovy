@@ -10,6 +10,7 @@ String[] modulesWithIT = [
         'core-framework',
         'ejb3-plugin',
         'graphml-plugin',
+        'graphql-plugin',
         'java8-plugin',
         'java-plugin',
         'javaee6-plugin',
