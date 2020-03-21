@@ -40,6 +40,7 @@ defineJobs('buschmais', new Project(repository: 'extended-objects', runSonar: tr
         new Project(repository: 'jqassistant-java-ddd-plugin'),
         new Project(repository: 'jqassistant-apoc-plugin'),
         new Project(repository: 'jqassistant-graph-algorithms-plugin'),
+        new Project(repository: 'jqassistant-wordcloud-report-plugin'),
         new Project(repository: 'sonar-jqassistant-plugin', runSonar: true)
 ].each {
     defineJobs('jqassistant-contrib', it)
