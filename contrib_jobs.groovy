@@ -11,10 +11,8 @@
  * - "GitHub": Private SSH Key
  *
  * Tool installations:
- * - "JDK 1.8"
- * - "Maven 3.5.0"
+ * - "Maven 3.6"
  */
-jdk = 'JDK 1.8'
 maven = 'Maven 3.6'
 mavenSettings = 'oss-maven-settings'
 gitCredentials = 'GitHub'
@@ -23,12 +21,14 @@ gitCredentials = 'GitHub'
 class Project {
     // The name of the GitHub repository
     String repository
+    // JDK
+    String jdk = 'JDK 1.8'
     // if true a sonar analysis will be triggered for each ci/release build
     boolean runSonar
 }
 
 // XO
-defineJobs('buschmais', new Project(repository: 'extended-objects', runSonar: true))
+defineJobs('buschmais', new Project(repository: 'extended-objects', jdk: 'JDK 11', runSonar: true))
 
 // jQA Contrib
 [
@@ -154,7 +154,7 @@ def release(organization, project) {
                 }
             }
         }
-        jdk(jdk)
+        jdk(project.jdk)
         mavenInstallation(maven)
         providedSettings(mavenSettings)
         goals('release:prepare release:perform -s "$MAVEN_SETTINGS" -DautoVersionSubmodules -DreleaseVersion=${ReleaseVersion} -Dtag=${ReleaseVersion} -DdevelopmentVersion=${DevelopmentVersion} -DdryRun=${DryRun}"')
