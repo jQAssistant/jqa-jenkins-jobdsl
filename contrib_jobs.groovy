@@ -154,7 +154,7 @@ def release(organization, project) {
                 }
             }
         }
-        jdk(project.jdk)
+        jdk(${project.jdk})
         mavenInstallation(maven)
         providedSettings(mavenSettings)
         goals('release:prepare release:perform -s "$MAVEN_SETTINGS" -DautoVersionSubmodules -DreleaseVersion=${ReleaseVersion} -Dtag=${ReleaseVersion} -DdevelopmentVersion=${DevelopmentVersion} -DdryRun=${DryRun}"')
