@@ -22,13 +22,13 @@ class Project {
     // The name of the GitHub repository
     String repository
     // JDK
-    String jdk = 'JDK 1.8'
+    String jdk = 'JDK 11'
     // if true a sonar analysis will be triggered for each ci/release build
     boolean runSonar
 }
 
 // XO
-defineJobs('buschmais', new Project(repository: 'extended-objects', jdk: 'JDK 11', runSonar: true))
+defineJobs('buschmais', new Project(repository: 'extended-objects', runSonar: true))
 
 // jQA Contrib
 [
