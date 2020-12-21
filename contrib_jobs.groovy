@@ -6,6 +6,7 @@
  * - Maven Integration plugin
  * - Config File Provider plugin providing 'oss-maven-settings' containing server settings for deploying to sonatype.org
  * - SSH Agent plugin (GitHub authentication)
+ * - Git Parameter plugin
  *
  * Credentials:
  * - "GitHub": Private SSH Key
@@ -76,7 +77,6 @@ def ci(organization, project) {
                     url(gitUrl)
                     credentials(gitCredentials)
                 }
-//                branches('refs/heads/*')
             }
         }
         triggers {
@@ -121,7 +121,11 @@ def release(organization, project) {
         }
         lockableResources(project.repository)
         parameters {
-            stringParam('Branch', 'master', 'The branch to build the release from.')
+            gitParam('Branch') {
+                description('The branch to build the release from.')
+                type('BRANCH')
+                defaultValue('origin/master')
+            }
             stringParam('ReleaseVersion', '', 'The version to release and to be used as tag.')
             stringParam('DevelopmentVersion', '', 'The next development version.')
             booleanParam('DryRun', false, '')
@@ -150,7 +154,7 @@ def release(organization, project) {
                     url(gitUrl)
                     credentials(gitCredentials)
                 }
-                branch('refs/heads/${Branch}')
+                branch('${Branch}')
                 extensions {
                     localBranch('${Branch}')
                 }
