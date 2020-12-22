@@ -155,9 +155,6 @@ def release(organization, project) {
                     credentials(gitCredentials)
                 }
                 branch('${Branch}')
-                extensions {
-                    localBranch('${Branch}')
-                }
             }
         }
         jdk(project.jdk)
