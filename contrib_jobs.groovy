@@ -25,27 +25,28 @@ class Project {
     // JDK
     String jdk = 'JDK 11'
     // if true a sonar analysis will be triggered for each ci/release build
-    boolean runSonar
+    boolean runSonar = true
 }
 
 // XO
-defineJobs('buschmais', new Project(repository: 'extended-objects', runSonar: true))
+defineJobs('buschmais', new Project(repository: 'extended-objects'))
 
 // jQA Contrib
 [
-        new Project(repository: 'jqassistant-contrib-common'),
-        new Project(repository: 'jqassistant-test-impact-analysis-plugin'),
-        new Project(repository: 'jqassistant-plantuml-rule-plugin'),
-        new Project(repository: 'jqassistant-dashboard-plugin'),
-        new Project(repository: 'jqassistant-java-metrics-plugin'),
-        new Project(repository: 'jqassistant-java-ddd-plugin'),
         new Project(repository: 'jqassistant-apoc-plugin'),
-        new Project(repository: 'jqassistant-graph-algorithms-plugin'),
-        new Project(repository: 'jqassistant-wordcloud-report-plugin'),
+        new Project(repository: 'jqassistant-contrib-common'),
+        new Project(repository: 'jqassistant-dashboard-plugin'),
         new Project(repository: 'jqassistant-docker-plugin'),
+        new Project(repository: 'jqassistant-graph-algorithms-plugin'),
         new Project(repository: 'jqassistant-hcl-plugin'),
+        new Project(repository: 'jqassistant-java-ddd-plugin'),
+        new Project(repository: 'jqassistant-java-metrics-plugin'),
         new Project(repository: 'jqassistant-jmolecules-plugin'),
-        new Project(repository: 'sonar-jqassistant-plugin', runSonar: true)
+        new Project(repository: 'jqassistant-plantuml-rule-plugin'),
+        new Project(repository: 'jqassistant-test-impact-analysis-plugin'),
+        new Project(repository: 'jqassistant-uml-plugin'),
+        new Project(repository: 'jqassistant-wordcloud-report-plugin'),
+        new Project(repository: 'sonar-jqassistant-plugin')
 ].each {
     defineJobs('jqassistant-contrib', it)
 }
