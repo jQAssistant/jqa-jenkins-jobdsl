@@ -44,8 +44,8 @@ defineJobs('buschmais', new Project(repository: 'extended-objects'))
         new Project(repository: 'jqassistant-jmolecules-plugin'),
         new Project(repository: 'jqassistant-plantuml-rule-plugin'),
         new Project(repository: 'jqassistant-test-impact-analysis-plugin'),
-        new Project(repository: 'jqassistant-uml-plugin'),
         new Project(repository: 'jqassistant-wordcloud-report-plugin'),
+        new Project(repository: 'jqassistant-xmi-plugin'),
         new Project(repository: 'sonar-jqassistant-plugin')
 ].each {
     defineJobs('jqassistant-contrib', it)
