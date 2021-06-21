@@ -34,6 +34,7 @@ defineJobs('buschmais', new Project(repository: 'extended-objects'))
 // jQA Contrib
 [
         new Project(repository: 'jqassistant-apoc-plugin'),
+        new Project(repository: 'jqassistant-context-mapper-plugin'),
         new Project(repository: 'jqassistant-contrib-common'),
         new Project(repository: 'jqassistant-dashboard-plugin'),
         new Project(repository: 'jqassistant-docker-plugin'),
