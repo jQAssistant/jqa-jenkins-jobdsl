@@ -158,7 +158,7 @@ def release(organization, project) {
                 }
                 branch('${Branch}')
                 extensions {
-                    localBranch('${Branch}')
+                    localBranch()
                 }
             }
         }
