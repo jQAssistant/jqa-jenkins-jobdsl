@@ -11,7 +11,6 @@ String[] modulesWithIT = [
         'ejb3-plugin',
         'graphml-plugin',
         'graphql-plugin',
-        'java8-plugin',
         'java-plugin',
         'javaee6-plugin',
         'junit-plugin',
@@ -30,8 +29,7 @@ String[] modulesWithIT = [
         'tycho-plugin',
         'xml-plugin',
         'yaml-plugin',
-        'yaml2-plugin',
-        'archivers-plugin'
+        'yaml2-plugin'
 ]
 
 String[] modulesWithSimpleBuild = [
