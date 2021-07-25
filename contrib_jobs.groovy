@@ -97,6 +97,7 @@ def ci(organization, project) {
         } else {
             goals('clean deploy -PIT')
         }
+        fingerprintingDisabled()
         publishers {
             mailer('dirk.mahler@buschmais.com', true, true)
         }
@@ -166,6 +167,7 @@ def release(organization, project) {
         mavenInstallation(maven)
         providedSettings(mavenSettings)
         goals('release:prepare release:perform -s "$MAVEN_SETTINGS" -DautoVersionSubmodules -DreleaseVersion=${ReleaseVersion} -Dtag=${ReleaseVersion} -DdevelopmentVersion=${DevelopmentVersion} -DdryRun=${DryRun}"')
+        fingerprintingDisabled()
         publishers {
             mailer('dirk.mahler@buschmais.com', true, true)
         }

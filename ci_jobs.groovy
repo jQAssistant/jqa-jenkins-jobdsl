@@ -107,8 +107,9 @@ def addJob(gitUrl, module, suffix, mavenGoals, upstreamJob = null, disableJob = 
         jdk(jdk)
         mavenInstallation(maven)
         providedSettings(mavenSettings)
-        goals(mavenGoals)
         mavenOpts('-Dmaven.test.failure.ignore=false');
+        goals(mavenGoals)
+        fingerprintingDisabled()
         publishers {
             mailer('dirk.mahler@buschmais.com,o.b.fischer@swe-blog.net', true, true)
         }
