@@ -33,6 +33,7 @@ String[] modulesWithIT = [
 ]
 
 String[] modulesWithSimpleBuild = [
+        'bill-of-materials',
         'checkstyle-config',
         'asciidoctor-utilities',
         'distribution-specification',
