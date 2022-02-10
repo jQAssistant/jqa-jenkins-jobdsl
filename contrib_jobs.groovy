@@ -16,6 +16,7 @@
  */
 maven = 'Maven 3.6'
 mavenSettings = 'oss-maven-settings'
+gitCredentials = 'GitHub'
 
 // Jobs
 class Project {
