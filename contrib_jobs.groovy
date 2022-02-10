@@ -16,7 +16,6 @@
  */
 maven = 'Maven 3.6'
 mavenSettings = 'oss-maven-settings'
-gitCredentials = 'GitHub'
 
 // Jobs
 class Project {
@@ -140,7 +139,6 @@ def release(organization, project) {
                     variable('MAVEN_SETTINGS')
                 }
             }
-            sshAgent(gitCredentials)
             credentialsBinding {
                 string('SONARCLOUD_LOGIN', 'SonarCloud')
             }
