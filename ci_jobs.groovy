@@ -74,6 +74,11 @@ listView('CI Jobs') {
 def addJob(gitUrl, module, suffix, mavenGoals, upstreamJob = null, disableJob = false, queueJob = false) {
     def jobName = "jqa-${module}-${suffix}-ManagedBuild"
     job = mavenJob(jobName) {
+        authorization {
+            permission('hudson.model.Item.Discover', 'anonymous')
+            permission('hudson.model.Item.Read', 'anonymous')
+            permission('hudson.model.Item.Workspace', 'anonymous')
+        }
         logRotator {
             numToKeep(10)
         }
