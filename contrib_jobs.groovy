@@ -32,7 +32,7 @@ class Project {
 defineJobs('buschmais', new Project(repository: 'extended-objects'))
 
 // jQA Contrib
-[
+def projects = [
         new Project(repository: 'jqassistant-apoc-plugin'),
         new Project(repository: 'jqassistant-c4-plugin'),
         new Project(repository: 'jqassistant-context-mapper-plugin'),
@@ -49,8 +49,24 @@ defineJobs('buschmais', new Project(repository: 'extended-objects'))
         new Project(repository: 'jqassistant-wordcloud-report-plugin'),
         new Project(repository: 'jqassistant-xmi-plugin'),
         new Project(repository: 'sonar-jqassistant-plugin')
-].each {
+]
+projects.each {
     defineJobs('jqassistant-contrib', it)
+}
+
+listView('jQAssistant Contrib') {
+    jobs {
+        names(projects.collect{it.repository})
+    }
+    columns {
+        status()
+        weather()
+        name()
+        lastSuccess()
+        lastFailure()
+        lastDuration()
+        buildButton()
+    }
 }
 
 def defineJobs(organization, project) {
@@ -124,6 +140,7 @@ def release(organization, project) {
             permission('hudson.model.Item.Workspace', 'anonymous')
         }
         lockableResources(project.repository)
+        localRepository(LocalRepositoryLocation.LOCAL_TO_EXECUTOR)
         parameters {
             gitParam('Branch') {
                 description('The branch to build the release from.')

@@ -56,7 +56,7 @@ modulesWithSimpleBuild.each {
     addJob(gitUrl, module, 'ci', 'clean deploy -Djqassistant.failOnSeverity=MINOR')
 }
 
-listView('CI Jobs') {
+listView('jQAssistant') {
     jobs {
         regex("jqa-.+")
     }
