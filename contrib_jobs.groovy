@@ -56,7 +56,7 @@ projects.each {
 
 listView('jQAssistant Contrib') {
     jobs {
-        names(projects.collect{it.repository})
+        names(projects.collect{it.repository} as String[])
     }
     columns {
         status()
