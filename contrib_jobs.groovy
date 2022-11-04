@@ -188,8 +188,8 @@ def release(organization, project) {
     }
 }
 
-def defineListView(listViewJobs, name) {
-    listView(name) {
+def defineListView(listViewJobs, viewName) {
+    listView(viewName) {
         jobs {
             names(listViewJobs.collect { it.repository + "-ci" } as String[])
         }
