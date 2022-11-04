@@ -1,5 +1,5 @@
 /**
- * Jenkins Job DSL for jQAssistant Contrib projects
+ * Jenkins Job DSL for jQAssistant Contrib/Plugin projects
  *
  * Plugins:
  * - Job DSL plugin
@@ -32,7 +32,7 @@ class Project {
 defineJobs('buschmais', new Project(repository: 'extended-objects'))
 
 // jQA Contrib
-def projects = [
+[
         new Project(repository: 'jqassistant-apoc-plugin'),
         new Project(repository: 'jqassistant-c4-plugin'),
         new Project(repository: 'jqassistant-context-mapper-plugin'),
@@ -49,9 +49,15 @@ def projects = [
         new Project(repository: 'jqassistant-wordcloud-report-plugin'),
         new Project(repository: 'jqassistant-xmi-plugin'),
         new Project(repository: 'sonar-jqassistant-plugin')
-]
-projects.each {
+].each {
     defineJobs('jqassistant-contrib', it)
+}
+
+// jQA Plugin
+[
+        new Project(repository: 'jqassistant-plugin-common')
+].each {
+    defineJobs('jqassistant-plugin', it)
 }
 
 listView('jQAssistant Contrib') {
