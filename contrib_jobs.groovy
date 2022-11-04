@@ -22,7 +22,7 @@ gitCredentials = 'GitHub'
 defineJobs('buschmais', new Project(repository: 'extended-objects'))
 
 // jQA Contrib
-contribJobs = [
+def contribJobs = [
         new Project(repository: 'jqassistant-apoc-plugin'),
         new Project(repository: 'jqassistant-c4-plugin'),
         new Project(repository: 'jqassistant-context-mapper-plugin'),
@@ -46,7 +46,7 @@ contribJobs.each {
 defineListView(contribJobs, 'jQAssistant Contrib');
 
 // jQA Plugin
-pluginJobs = [
+def pluginJobs = [
         new Project(repository: 'jqassistant-plugin-common')
 ]
 pluginJobs.each {
