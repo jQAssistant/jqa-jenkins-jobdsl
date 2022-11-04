@@ -18,21 +18,11 @@ maven = 'Maven 3.6'
 mavenSettings = 'oss-maven-settings'
 gitCredentials = 'GitHub'
 
-// Jobs
-class Project {
-    // The name of the GitHub repository
-    String repository
-    // JDK
-    String jdk = 'JDK 11'
-    // if true a sonar analysis will be triggered for each ci/release build
-    boolean runSonar = true
-}
-
 // XO
 defineJobs('buschmais', new Project(repository: 'extended-objects'))
 
 // jQA Contrib
-[
+contribJobs = [
         new Project(repository: 'jqassistant-apoc-plugin'),
         new Project(repository: 'jqassistant-c4-plugin'),
         new Project(repository: 'jqassistant-context-mapper-plugin'),
@@ -49,30 +39,31 @@ defineJobs('buschmais', new Project(repository: 'extended-objects'))
         new Project(repository: 'jqassistant-wordcloud-report-plugin'),
         new Project(repository: 'jqassistant-xmi-plugin'),
         new Project(repository: 'sonar-jqassistant-plugin')
-].each {
+]
+contribJobs.each {
     defineJobs('jqassistant-contrib', it)
 }
+defineListView(contribJobs, 'jQAssistant Contrib');
 
 // jQA Plugin
-[
+pluginJobs = [
         new Project(repository: 'jqassistant-plugin-common')
-].each {
+]
+pluginJobs.each {
     defineJobs('jqassistant-plugin', it)
 }
+defineListView(pluginJobs, 'jQAssistant Plugin');
 
-listView('jQAssistant Contrib') {
-    jobs {
-        names(projects.collect{it.repository + "-ci"} as String[])
-    }
-    columns {
-        status()
-        weather()
-        name()
-        lastSuccess()
-        lastFailure()
-        lastDuration()
-        buildButton()
-    }
+// definitions and functions
+
+// Jobs
+class Project {
+    // The name of the GitHub repository
+    String repository
+    // JDK
+    String jdk = 'JDK 11'
+    // if true a sonar analysis will be triggered for each ci/release build
+    boolean runSonar = true
 }
 
 def defineJobs(organization, project) {
@@ -193,6 +184,23 @@ def release(organization, project) {
         fingerprintingDisabled()
         publishers {
             mailer('dirk.mahler@buschmais.com', true, true)
+        }
+    }
+}
+
+def defineListView(listViewJobs, name) {
+    listView(name) {
+        jobs {
+            names(listViewJobs.collect { it.repository + "-ci" } as String[])
+        }
+        columns {
+            status()
+            weather()
+            name()
+            lastSuccess()
+            lastFailure()
+            lastDuration()
+            buildButton()
         }
     }
 }
