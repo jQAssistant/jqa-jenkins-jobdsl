@@ -4,31 +4,16 @@ mavenSettings = 'oss-maven-settings'
 gitCredentials = 'GitHub'
 
 String[] modulesWithIT = [
-        'asciidoc-report-plugin',
-        'cdi-plugin',
         'commandline-tool',
         'core-framework',
-        'ejb3-plugin',
-        'graphml-plugin',
-        'graphql-plugin',
         'java-plugin',
-        'javaee6-plugin',
         'junit-plugin',
-        'jpa2-plugin',
-        'jaxrs-plugin',
         'json-plugin',
-        'm2repo-plugin',
         'maven-plugin',
         'maven3-plugin',
         'neo4j-backend',
-        'osgi-plugin',
         'plugin-common',
-        'rdbms-plugin',
-        'spring-plugin',
-        'testng-plugin',
-        'tycho-plugin',
         'xml-plugin',
-        'yaml-plugin',
         'yaml2-plugin'
 ]
 

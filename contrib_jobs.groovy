@@ -27,16 +27,9 @@ def contribJobs = [
         new Project(repository: 'jqassistant-c4-plugin'),
         new Project(repository: 'jqassistant-context-mapper-plugin'),
         new Project(repository: 'jqassistant-contrib-common'),
-        new Project(repository: 'jqassistant-dashboard-plugin'),
         new Project(repository: 'jqassistant-docker-plugin'),
-        new Project(repository: 'jqassistant-graph-algorithms-plugin'),
         new Project(repository: 'jqassistant-hcl-plugin'),
-        new Project(repository: 'jqassistant-java-ddd-plugin'),
-        new Project(repository: 'jqassistant-java-metrics-plugin'),
         new Project(repository: 'jqassistant-jmolecules-plugin'),
-        new Project(repository: 'jqassistant-plantuml-rule-plugin'),
-        new Project(repository: 'jqassistant-test-impact-analysis-plugin'),
-        new Project(repository: 'jqassistant-wordcloud-report-plugin'),
         new Project(repository: 'jqassistant-xmi-plugin'),
         new Project(repository: 'sonar-jqassistant-plugin')
 ]
@@ -47,7 +40,15 @@ defineListView(contribJobs, 'jQAssistant Contrib');
 
 // jQA Plugin
 def pluginJobs = [
-        new Project(repository: 'jqassistant-plugin-common')
+        new Project(repository: 'jqassistant-asciidoc-report-plugin'),
+        new Project(repository: 'jqassistant-graphml-plugin'),
+        new Project(repository: 'jqassistant-graphql-plugin'),
+        new Project(repository: 'jqassistant-jee-plugin'),
+        new Project(repository: 'jqassistant-m2repo-plugin'),
+        new Project(repository: 'jqassistant-plugin-common'),
+        new Project(repository: 'jqassistant-rdbms-plugin'),
+        new Project(repository: 'jqassistant-spring-plugin')
+        
 ]
 pluginJobs.each {
     defineJobs('jqassistant-plugin', it)
