@@ -1,4 +1,4 @@
-jdk = 'JDK 1.8'
+jdk = 'JDK 11'
 maven = 'Maven 3.6'
 mavenSettings = 'oss-maven-settings'
 gitCredentials = 'GitHub'
