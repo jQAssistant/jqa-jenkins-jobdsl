@@ -71,7 +71,7 @@ def addJob(gitUrl, module, suffix, mavenGoals, upstreamJob = null, disableJob = 
         localRepository(LocalRepositoryLocation.LOCAL_TO_EXECUTOR)
         wrappers {
             timeout {
-                absolute(minutes = 60)
+                absolute(minutes = 90)
             }
         }
         scm {
