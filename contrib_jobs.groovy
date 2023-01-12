@@ -30,6 +30,7 @@ def contribJobs = [
         new Project(repository: 'jqassistant-docker-plugin'),
         new Project(repository: 'jqassistant-hcl-plugin'),
         new Project(repository: 'jqassistant-jmolecules-plugin'),
+        new Project(repository: 'jqassistant-npm-plugin'),
         new Project(repository: 'jqassistant-xmi-plugin'),
         new Project(repository: 'sonar-jqassistant-plugin')
 ]
