@@ -23,9 +23,7 @@ defineJobs('buschmais', new Project(repository: 'extended-objects'))
 
 // jQA Contrib
 def contribJobs = [
-        new Project(repository: 'jqassistant-apoc-plugin'),
-        new Project(repository: 'jqassistant-c4-plugin'),
-        new Project(repository: 'jqassistant-context-mapper-plugin'),
+        new Project(repository: 'jqassistant-apoc-plugin'),        
         new Project(repository: 'jqassistant-contrib-common'),
         new Project(repository: 'jqassistant-docker-plugin'),
         new Project(repository: 'jqassistant-hcl-plugin'),
@@ -42,6 +40,8 @@ defineListView(contribJobs, 'jQAssistant Contrib');
 // jQA Plugin
 def pluginJobs = [
         new Project(repository: 'jqassistant-asciidoc-report-plugin'),
+        new Project(repository: 'jqassistant-c4-plugin'),        
+        new Project(repository: 'jqassistant-context-mapper-plugin'),
         new Project(repository: 'jqassistant-graphml-plugin'),
         new Project(repository: 'jqassistant-graphql-plugin'),
         new Project(repository: 'jqassistant-jee-plugin'),
