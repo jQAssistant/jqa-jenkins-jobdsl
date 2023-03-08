@@ -30,7 +30,8 @@ def contribJobs = [
         new Project(repository: 'jqassistant-jmolecules-plugin'),
         new Project(repository: 'jqassistant-npm-plugin'),
         new Project(repository: 'jqassistant-xmi-plugin'),
-        new Project(repository: 'sonar-jqassistant-plugin')
+        new Project(repository: 'sonar-jqassistant-plugin'),
+        new Project(repository: 'jqassistant-asciidoctorj-extensions')
 ]
 contribJobs.each {
     defineJobs('jqassistant-contrib', it)
