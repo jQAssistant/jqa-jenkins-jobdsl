@@ -47,6 +47,7 @@ def pluginJobs = [
         new Project(repository: 'jqassistant-graphql-plugin'),
         new Project(repository: 'jqassistant-jee-plugin'),
         new Project(repository: 'jqassistant-m2repo-plugin'),
+        new Project(repository: 'jqassistant-plantuml-report-plugin'),
         new Project(repository: 'jqassistant-plugin-common'),
         new Project(repository: 'jqassistant-rdbms-plugin'),
         new Project(repository: 'jqassistant-spring-plugin')
