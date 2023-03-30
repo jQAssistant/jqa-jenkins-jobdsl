@@ -43,6 +43,7 @@ def pluginJobs = [
         new Project(repository: 'jqassistant-asciidoc-report-plugin'),
         new Project(repository: 'jqassistant-c4-plugin'),        
         new Project(repository: 'jqassistant-context-mapper-plugin'),
+        new Project(repository: 'jqassistant-github-plugin'),
         new Project(repository: 'jqassistant-graphml-plugin'),
         new Project(repository: 'jqassistant-graphql-plugin'),
         new Project(repository: 'jqassistant-jee-plugin'),
