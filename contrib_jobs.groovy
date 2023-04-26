@@ -28,7 +28,6 @@ def contribJobs = [
         new Project(repository: 'jqassistant-docker-plugin'),
         new Project(repository: 'jqassistant-hcl-plugin'),
         new Project(repository: 'jqassistant-jmolecules-plugin'),
-        new Project(repository: 'jqassistant-npm-plugin'),
         new Project(repository: 'jqassistant-xmi-plugin'),
         new Project(repository: 'sonar-jqassistant-plugin'),
         new Project(repository: 'jqassistant-asciidoctorj-extensions')
@@ -49,6 +48,7 @@ def pluginJobs = [
         new Project(repository: 'jqassistant-jee-plugin'),
         new Project(repository: 'jqassistant-mapstruct-plugin'),
         new Project(repository: 'jqassistant-m2repo-plugin'),
+        new Project(repository: 'jqassistant-npm-plugin'),
         new Project(repository: 'jqassistant-plantuml-report-plugin'),
         new Project(repository: 'jqassistant-plugin-common'),
         new Project(repository: 'jqassistant-rdbms-plugin'),
