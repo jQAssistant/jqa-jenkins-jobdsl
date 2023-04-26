@@ -49,6 +49,7 @@ def pluginJobs = [
         new Project(repository: 'jqassistant-mapstruct-plugin'),
         new Project(repository: 'jqassistant-m2repo-plugin'),
         new Project(repository: 'jqassistant-npm-plugin'),
+        new Project(repository: 'jqassistant-openapi-plugin'),
         new Project(repository: 'jqassistant-plantuml-report-plugin'),
         new Project(repository: 'jqassistant-plugin-common'),
         new Project(repository: 'jqassistant-rdbms-plugin'),
