@@ -113,7 +113,7 @@ def ci(organization, project) {
         jdk(project.jdk)
         mavenInstallation(maven)
         providedSettings(mavenSettings)
-        def mavenGoal = (GIT_BRANCH == 'main' || GIT_BRANCH == 'master') ? 'deploy' : 'verify'
+        def mavenGoal = (GIT_BRANCH == 'origin/main' || GIT_BRANCH == 'origin/master') ? 'deploy' : 'verify'
         if (project.runSonar) {
             goals("clean ${mavenGoal} -PIT,sonar")
         } else {
