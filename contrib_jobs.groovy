@@ -25,7 +25,6 @@ defineJobs('buschmais', new Project(repository: 'extended-objects'))
 def contribJobs = [
         new Project(repository: 'jqassistant-contrib-common'),
         new Project(repository: 'jqassistant-hcl-plugin'),
-        new Project(repository: 'jqassistant-xmi-plugin'),
         new Project(repository: 'sonar-jqassistant-plugin'),
         new Project(repository: 'jqassistant-asciidoctorj-extensions')
 ]
@@ -53,8 +52,8 @@ def pluginJobs = [
         new Project(repository: 'jqassistant-plantuml-report-plugin'),
         new Project(repository: 'jqassistant-plugin-common'),
         new Project(repository: 'jqassistant-rdbms-plugin'),
-        new Project(repository: 'jqassistant-spring-plugin')
-        
+        new Project(repository: 'jqassistant-spring-plugin'),
+        new Project(repository: 'jqassistant-xmi-plugin')
 ]
 pluginJobs.each {
     defineJobs('jqassistant-plugin', it)
