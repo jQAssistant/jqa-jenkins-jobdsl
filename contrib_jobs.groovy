@@ -114,7 +114,7 @@ def ci(organization, project) {
         providedSettings(mavenSettings)
         def mavenGoal = (GIT_BRANCH == 'origin/main' || GIT_BRANCH == 'origin/master') ? 'deploy' : 'verify'
         if (project.runSonar) {
-                goals("clean ${mavenGoal} -PIT,sonar -Dsonar.branch.name=${BRANCH_NAME}")
+                goals("clean ${mavenGoal} -PIT,sonar -Dsonar.branch.name=$BRANCH_NAME")
         } else {
             goals("clean ${mavenGoal} -PIT")
         }
