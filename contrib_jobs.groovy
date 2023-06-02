@@ -119,10 +119,7 @@ def ci(organization, project) {
         def mavenGoal = (GIT_BRANCH == 'origin/main' || GIT_BRANCH == 'origin/master') ? 'deploy' : 'verify'
         def options = '-PIT'
         if (project.runSonar) {
-            options = options + ',sonar'
-            if (project.sonarTargetBranch) {
-                options = options + ' -Dsonar.branch.name=$GIT_LOCAL_BRANCH -Dsonar.branch.target=' + project.sonarTargetBranch
-            }
+            options = options + ',sonar -Dsonar.branch.name=$GIT_LOCAL_BRANCH'
         }
         goals('clean ' + mavenGoal + ' ' + options)
         fingerprintingDisabled()
