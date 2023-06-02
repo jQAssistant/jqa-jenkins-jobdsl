@@ -117,11 +117,14 @@ def ci(organization, project) {
         mavenInstallation(maven)
         providedSettings(mavenSettings)
         def mavenGoal = (GIT_BRANCH == 'origin/main' || GIT_BRANCH == 'origin/master') ? 'deploy' : 'verify'
+        def options = '-PIT'
         if (project.runSonar) {
-                goals('clean ' + mavenGoal + ' -PIT,sonar -Dsonar.branch.name=$GIT_BRANCH')
-        } else {
-            goals("clean ${mavenGoal} -PIT")
+            options = options + ',sonar'
+            if (project.sonarTargetBranch) {
+                options = options + ' -Dsonar.branch.name=$GIT_LOCAL_BRANCH -Dsonar.branch.target=' + project.sonarTargetBranch
+            }
         }
+        goals('clean ' + mavenGoal + ' ' + options)
         fingerprintingDisabled()
         publishers {
             mailer('dirk.mahler@buschmais.com', true, true)
