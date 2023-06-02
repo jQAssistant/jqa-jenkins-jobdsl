@@ -24,7 +24,6 @@ defineJobs('buschmais', new Project(repository: 'extended-objects'))
 // jQA Contrib
 def contribJobs = [
         new Project(repository: 'jqassistant-contrib-common'),
-        new Project(repository: 'jqassistant-hcl-plugin'),
         new Project(repository: 'sonar-jqassistant-plugin'),
         new Project(repository: 'jqassistant-asciidoctorj-extensions')
 ]
@@ -48,7 +47,7 @@ def pluginJobs = [
         new Project(repository: 'jqassistant-mapstruct-plugin'),
         new Project(repository: 'jqassistant-m2repo-plugin'),
         new Project(repository: 'jqassistant-npm-plugin'),
-        new Project(repository: 'jqassistant-openapi-plugin'),
+        new Project(repository: 'jqassistant-openapi-plugin', sonarTargetBranch: 'main'),
         new Project(repository: 'jqassistant-plantuml-report-plugin'),
         new Project(repository: 'jqassistant-plugin-common'),
         new Project(repository: 'jqassistant-rdbms-plugin'),
@@ -70,6 +69,8 @@ class Project {
     String jdk = 'JDK 11'
     // if true a sonar analysis will be triggered for each ci/release build
     boolean runSonar = true
+    // the target branch for sonar target branch analysis
+    String sonarTargetBranch
 }
 
 def defineJobs(organization, project) {
@@ -99,6 +100,9 @@ def ci(organization, project) {
                     url(gitUrl)
                     credentials(gitCredentials)
                 }
+                extensions {
+                    localBranch()
+                }
             }
         }
         triggers {
@@ -114,7 +118,7 @@ def ci(organization, project) {
         providedSettings(mavenSettings)
         def mavenGoal = (GIT_BRANCH == 'origin/main' || GIT_BRANCH == 'origin/master') ? 'deploy' : 'verify'
         if (project.runSonar) {
-                goals("clean ${mavenGoal} -PIT,sonar -Dsonar.branch.name=${GIT_BRANCH}")
+                goals("clean ${mavenGoal} -PIT,sonar -Dsonar.branch.name=$GIT_BRANCH")
         } else {
             goals("clean ${mavenGoal} -PIT")
         }
