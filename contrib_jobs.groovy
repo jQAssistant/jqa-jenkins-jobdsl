@@ -1,5 +1,5 @@
 /**
- * Jenkins Job DSL for jQAssistant Contrib/Plugin projects
+ * Jenkins Job DSL for jQAssistant Tooling/Plugin projects
  *
  * Plugins:
  * - Job DSL plugin
@@ -21,16 +21,16 @@ gitCredentials = 'GitHub'
 // XO
 defineJobs('buschmais', new Project(repository: 'extended-objects'))
 
-// jQA Contrib
-def contribJobs = [
-        new Project(repository: 'jqassistant-contrib-common'),
+// jQA Tooling
+def toolingJobs = [
+        new Project(repository: 'jqassistant-tooling-common'),
         new Project(repository: 'sonar-jqassistant-plugin'),
         new Project(repository: 'jqassistant-asciidoctorj-extensions')
 ]
-contribJobs.each {
-    defineJobs('jqassistant-contrib', it)
+toolingJobs.each {
+    defineJobs('jqassistant-tooling', it)
 }
-defineListView(contribJobs, 'jQAssistant Contrib');
+defineListView(toolingJobs, 'jQAssistant Tooling');
 
 // jQA Plugin
 def pluginJobs = [
