@@ -36,7 +36,6 @@ defineListView(toolingJobs, 'jQAssistant Tooling');
 def pluginJobs = [
         new Project(repository: 'jqassistant-apoc-plugin'),
         new Project(repository: 'jqassistant-asciidoc-report-plugin'),
-        new Project(repository: 'jqassistant-c4-plugin'),
         new Project(repository: 'jqassistant-context-mapper-plugin'),
         new Project(repository: 'jqassistant-cyclonedx-plugin'),
         new Project(repository: 'jqassistant-docker-plugin'),
@@ -54,8 +53,12 @@ def pluginJobs = [
         new Project(repository: 'jqassistant-plugin-common'),
         new Project(repository: 'jqassistant-rdbms-plugin'),
         new Project(repository: 'jqassistant-spring-plugin'),
-        new Project(repository: 'jqassistant-typescript-plugin'),
         new Project(repository: 'jqassistant-xmi-plugin')
+/*
+        Migrated to GitHub actions:
+        new Project(repository: 'jqassistant-c4-plugin'),
+        new Project(repository: 'jqassistant-typescript-plugin'),
+*/
 ]
 pluginJobs.each {
     defineJobs('jqassistant-plugin', it)
