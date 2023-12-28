@@ -98,7 +98,7 @@ def addJob(gitUrl, module, suffix, mavenGoals, upstreamJob = null, disableJob = 
         jdk(jdk)
         mavenInstallation(maven)
         providedSettings(mavenSettings)
-        mavenOpts('-Dmaven.test.failure.ignore=false');
+        mavenOpts('--add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED -Dmaven.test.failure.ignore=false');
         goals(mavenGoals)
         fingerprintingDisabled()
         publishers {
