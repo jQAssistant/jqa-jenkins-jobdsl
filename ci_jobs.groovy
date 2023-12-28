@@ -102,7 +102,7 @@ def addJob(gitUrl, module, suffix, mavenGoals, upstreamJob = null, disableJob = 
         goals(mavenGoals)
         fingerprintingDisabled()
         publishers {
-            mailer('dirk.mahler@buschmais.com,o.b.fischer@swe-blog.net', true, true)
+            mailer('dirk.mahler@buschmais.com', true, true)
         }
         if (disableJob) {
             disabled()
