@@ -14,8 +14,9 @@
  * Tool installations:
  * - "Maven 3.6"
  */
-maven = 'Maven 3.6'
+maven = 'Maven 3.9'
 mavenSettings = 'oss-maven-settings'
+mavenOpts = '--add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED'
 gitCredentials = 'GitHub'
 
 // XO
@@ -72,7 +73,7 @@ class Project {
     // The name of the GitHub repository
     String repository
     // JDK
-    String jdk = 'JDK 11'
+    String jdk = 'JDK 17'
     // if true a sonar analysis will be triggered for each ci/release build
     boolean runSonar = true
     // the target branch for sonar target branch analysis
@@ -122,6 +123,7 @@ def ci(organization, project) {
         jdk(project.jdk)
         mavenInstallation(maven)
         providedSettings(mavenSettings)
+        mavenOpts(mavenOpts);
         def mavenGoal = (GIT_BRANCH == 'origin/main' || GIT_BRANCH == 'origin/master') ? 'deploy' : 'verify'
         def options = '-PIT'
         if (project.runSonar) {
@@ -197,6 +199,7 @@ def release(organization, project) {
         jdk(project.jdk)
         mavenInstallation(maven)
         providedSettings(mavenSettings)
+        mavenOpts(mavenOpts);
         goals('release:prepare release:perform -s "$MAVEN_SETTINGS" -DautoVersionSubmodules -DreleaseVersion=${ReleaseVersion} -Dtag=${ReleaseVersion} -DdevelopmentVersion=${DevelopmentVersion} -DdryRun=${DryRun}"')
         fingerprintingDisabled()
         publishers {
