@@ -16,7 +16,7 @@
  */
 maven = 'Maven 3.9'
 mavenSettings = 'oss-maven-settings'
-mavenOpts = '--add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED'
+mavenOptsJdk17 = '--add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED'
 gitCredentials = 'GitHub'
 
 // XO
@@ -123,7 +123,7 @@ def ci(organization, project) {
         jdk(project.jdk)
         mavenInstallation(maven)
         providedSettings(mavenSettings)
-        mavenOpts(mavenOpts);
+        mavenOpts(mavenOptsJdk17);
         def mavenGoal = (GIT_BRANCH == 'origin/main' || GIT_BRANCH == 'origin/master') ? 'deploy' : 'verify'
         def options = '-PIT'
         if (project.runSonar) {
@@ -199,7 +199,7 @@ def release(organization, project) {
         jdk(project.jdk)
         mavenInstallation(maven)
         providedSettings(mavenSettings)
-        mavenOpts(mavenOpts);
+        mavenOpts(mavenOptsJdk17);
         goals('release:prepare release:perform -s "$MAVEN_SETTINGS" -DautoVersionSubmodules -DreleaseVersion=${ReleaseVersion} -Dtag=${ReleaseVersion} -DdevelopmentVersion=${DevelopmentVersion} -DdryRun=${DryRun}"')
         fingerprintingDisabled()
         publishers {
