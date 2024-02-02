@@ -44,20 +44,20 @@ def pluginJobs = [
         new Project(repository: 'jqassistant-graphml-plugin'),
         new Project(repository: 'jqassistant-graphql-plugin'),
         new Project(repository: 'jqassistant-jee-plugin'),
-        new Project(repository: 'jqassistant-jmolecules-plugin'),
         new Project(repository: 'jqassistant-mapstruct-plugin'),
         new Project(repository: 'jqassistant-m2repo-plugin'),
         new Project(repository: 'jqassistant-nexusiq-plugin'),
         new Project(repository: 'jqassistant-npm-plugin'),
         new Project(repository: 'jqassistant-plantuml-report-plugin'),
-        new Project(repository: 'jqassistant-plugin-common'),
-        new Project(repository: 'jqassistant-rdbms-plugin'),
-        new Project(repository: 'jqassistant-spring-plugin'),
+        new Project(repository: 'jqassistant-rdbms-plugin'),        
         new Project(repository: 'jqassistant-xmi-plugin')
 /*
         Migrated to GitHub actions:
-        new Project(repository: 'jqassistant-openapi-plugin', sonarTargetBranch: 'main'),
         new Project(repository: 'jqassistant-c4-plugin'),
+        new Project(repository: 'jqassistant-jmolecules-plugin'),
+        new Project(repository: 'jqassistant-openapi-plugin', sonarTargetBranch: 'main'),
+        new Project(repository: 'jqassistant-plugin-common'),
+        new Project(repository: 'jqassistant-spring-plugin'),        
         new Project(repository: 'jqassistant-typescript-plugin'),
 */
 ]
