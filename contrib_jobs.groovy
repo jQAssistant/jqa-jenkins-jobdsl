@@ -36,8 +36,7 @@ defineListView(toolingJobs, 'jQAssistant Tooling');
 // jQA Plugin
 def pluginJobs = [
         new Project(repository: 'jqassistant-apoc-plugin'),
-        new Project(repository: 'jqassistant-asciidoc-report-plugin'),
-        new Project(repository: 'jqassistant-context-mapper-plugin'),
+        new Project(repository: 'jqassistant-asciidoc-report-plugin'),        
         new Project(repository: 'jqassistant-cyclonedx-plugin'),
         new Project(repository: 'jqassistant-docker-plugin'),
         new Project(repository: 'jqassistant-github-plugin'),
@@ -54,6 +53,7 @@ def pluginJobs = [
 /*
         Migrated to GitHub actions:
         new Project(repository: 'jqassistant-c4-plugin'),
+        new Project(repository: 'jqassistant-context-mapper-plugin'),
         new Project(repository: 'jqassistant-jmolecules-plugin'),
         new Project(repository: 'jqassistant-openapi-plugin', sonarTargetBranch: 'main'),
         new Project(repository: 'jqassistant-plugin-common'),
