@@ -102,7 +102,6 @@ def addJob(gitUrl, module, suffix, mavenGoals, upstreamJob = null, disableJob = 
         goals(mavenGoals)
         fingerprintingDisabled()
         publishers {
-            archiveJunit('**/target/invoker-reports/*.xml')
             mailer('dirk.mahler@buschmais.com', true, true)
         }
         if (disableJob) {
