@@ -101,13 +101,9 @@ def addJob(gitUrl, module, suffix, mavenGoals, upstreamJob = null, disableJob = 
         mavenOpts('--add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED -Dmaven.test.failure.ignore=false');
         goals(mavenGoals)
         fingerprintingDisabled()
+        archiveJunit('**/target/invoker-reports/*.xml')
         publishers {
             mailer('dirk.mahler@buschmais.com', true, true)
-            xunit {
-                JUnit  {
-                    pattern: 'target/invoker-reports/*.xml'
-                }
-            }
         }
         if (disableJob) {
             disabled()
