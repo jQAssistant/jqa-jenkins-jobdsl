@@ -19,8 +19,6 @@ mavenSettings = 'oss-maven-settings'
 mavenOptsJdk17 = '--add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED'
 gitCredentials = 'GitHub'
 
-// XO
-defineJobs('buschmais', new Project(repository: 'extended-objects'))
 
 // jQA Tooling
 def toolingJobs = [
