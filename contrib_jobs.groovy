@@ -35,31 +35,8 @@ defineListView(toolingJobs, 'jQAssistant Tooling');
 
 // jQA Plugin
 def pluginJobs = [
-        new Project(repository: 'jqassistant-apoc-plugin'),
-        new Project(repository: 'jqassistant-asciidoc-report-plugin'),        
-        new Project(repository: 'jqassistant-cyclonedx-plugin'),
-        new Project(repository: 'jqassistant-github-plugin'),
-        new Project(repository: 'jqassistant-graphql-plugin'),
-        new Project(repository: 'jqassistant-jee-plugin'),
-        new Project(repository: 'jqassistant-mapstruct-plugin'),
-        new Project(repository: 'jqassistant-m2repo-plugin'),
-        new Project(repository: 'jqassistant-nexusiq-plugin'),
-        new Project(repository: 'jqassistant-npm-plugin'),
-        new Project(repository: 'jqassistant-plantuml-report-plugin'),
-        new Project(repository: 'jqassistant-rdbms-plugin'),        
         new Project(repository: 'jqassistant-xmi-plugin')
-/*
-        Migrated to GitHub actions:
-        new Project(repository: 'jqassistant-c4-plugin'),
-        new Project(repository: 'jqassistant-context-mapper-plugin'),
-        new Project(repository: 'jqassistant-docker-plugin'),
-        new Project(repository: 'jqassistant-graphml-plugin'),
-        new Project(repository: 'jqassistant-jmolecules-plugin'),
-        new Project(repository: 'jqassistant-openapi-plugin', sonarTargetBranch: 'main'),
-        new Project(repository: 'jqassistant-plugin-common'),
-        new Project(repository: 'jqassistant-spring-plugin'),        
-        new Project(repository: 'jqassistant-typescript-plugin'),
-*/
+
 ]
 pluginJobs.each {
     defineJobs('jqassistant-plugin', it)
