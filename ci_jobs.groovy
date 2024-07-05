@@ -19,11 +19,8 @@ String[] modulesWithIT = [
 
 String[] modulesWithSimpleBuild = [
         'bill-of-materials',
-        'checkstyle-config',
-        'asciidoctor-utilities',
         'distribution-specification',
         'manual',
-        'own-constraints',
         'plugin-parent',
         'uber-parent'
 ]
